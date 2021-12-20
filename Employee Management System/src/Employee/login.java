@@ -73,8 +73,8 @@ class login  implements ActionListener{
         f.add(t2);
         
         b1 = new JButton("Login");
-        b1.setBounds(700,660,120,40);
-        b1.setFont(new Font("solaris-2",Font.BOLD,15));
+        b1.setBounds(770,640,140,50);
+        b1.setFont(new Font("solaris-2",Font.ROMAN_BASELINE,20));
         b1.addActionListener(this);
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
@@ -86,6 +86,10 @@ class login  implements ActionListener{
         b2.setContentAreaFilled(false);
         b2.setBorderPainted(false);
         b2.setFont(new Font("solaris-2",Font.BOLD,15));
+        Font font1 = b2.getFont();
+         Map attributes1 = font1.getAttributes();
+        attributes1.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        b2.setFont(font.deriveFont(attributes1));
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.BLACK);
         b2.addActionListener(this);

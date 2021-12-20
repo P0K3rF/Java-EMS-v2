@@ -7,7 +7,9 @@ package Employee;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.font.TextAttribute;
 import java.sql.*;
+import java.util.Map;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
@@ -39,6 +41,23 @@ class user implements ActionListener{
         l3.add(l4);
         f.add(l3);
         
+        JLabel l5=new JLabel("USER LOGIN");
+        l5.setForeground(Color.BLACK);
+        l5.setFont(new Font("solaris-2", Font.BOLD,20));
+        l5.setBounds(130,20,150,50);
+        Font font1 = l5.getFont();
+        Map attributes1 = font1.getAttributes();
+        attributes1.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        l5.setFont(font1.deriveFont(attributes1));
+        l4.add(l5);
+        
+        JLabel l6=new JLabel("Please Enter Your Login Details.");
+        l6.setForeground(Color.BLACK);
+        l6.setFont(new Font("solaris-2", Font.ITALIC,15));
+        l6.setBounds(100,30,350,150);
+        l4.add(l6);
+       
+        
         l1=new JLabel("Username");
         l1.setForeground(Color.BLACK);
         l1.setFont(new Font("solaris-2", Font.ROMAN_BASELINE,20));
@@ -48,43 +67,52 @@ class user implements ActionListener{
         l2=new JLabel("Password");
         l2.setForeground(Color.BLACK);
         l2.setFont(new Font("solaris-2", Font.ROMAN_BASELINE,20));
-        l2.setBounds(20,260,100,30);
+        l2.setBounds(20,240,100,30);
         l4.add(l2);
         
         t1=new JTextField();
         
         t1.requestFocus();
-        t1.setForeground(Color.WHITE);
+        t1.setCaretColor(Color.WHITE);
+        t1.setForeground(Color.BLACK);
         t1.setFont(new Font("solaris-2", Font.ROMAN_BASELINE,20));
          t1.setOpaque(false);
          t1.setBorder(new LineBorder(Color.BLACK, 3,true));
-        t1.setBounds(40,180,280,50);
+        t1.setBounds(40,170,280,50);
         l4.add(t1);
         
         t2=new JPasswordField();
-       
-        t2.setForeground(Color.WHITE);
+        t2.setForeground(Color.BLACK);
+        t2.setCaretColor(Color.WHITE);
         t2.setFont(new Font("solaris-2", Font.ROMAN_BASELINE,20));
          t2.setOpaque(false);
          t2.setBorder(new LineBorder(Color.BLACK, 3,true));
-        t2.setBounds(40,310,280,50);
+        t2.setBounds(40,280,280,50);
         l4.add(t2);
         
         b1 = new JButton("Login");
-        b1.setBounds(40,140,120,30);
-        b1.setFont(new Font("serif",Font.BOLD,15));
+        b1.setBounds(120,360,140,50);
+        b1.setFont(new Font("serif",Font.ROMAN_BASELINE,25));
         b1.addActionListener(this);
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
-        l3.add(b1);
+        l4.add(b1);
         
-        b2=new JButton("Cancel");
-        b2.setBounds(180,140,120,30);
-        b2.setFont(new Font("serif",Font.BOLD,15));
+        b2=new JButton("Go to Home Menu");
+        b2.setBounds(180,430,200,40);
+         b2.setOpaque(false);
+        b2.setContentAreaFilled(false);
+        b2.setBorderPainted(false);
+        b2.setFont(new Font("solaris-2",Font.BOLD,15));
+        
+        Font font = b2.getFont();
+         Map attributes = font.getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        b2.setFont(font.deriveFont(attributes));
         b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.WHITE);
-        l3.add(b2);
+        b2.setForeground(Color.BLACK);
         b2.addActionListener(this);
+        l4.add(b2);
         
          f.getContentPane().setBackground(Color.WHITE);
 
