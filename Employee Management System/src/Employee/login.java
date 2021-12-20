@@ -87,7 +87,7 @@ class login  implements ActionListener{
         b2.setBorderPainted(false);
         b2.setFont(new Font("solaris-2",Font.BOLD,15));
         b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.WHITE);
+        b2.setForeground(Color.BLACK);
         b2.addActionListener(this);
         f.add(b2);
         
@@ -105,11 +105,7 @@ class login  implements ActionListener{
         l4.setBounds(650, 300, 400, 480);
         l3.add(l4);
         f.add(l3);
-        
-        
-
-        
-        
+           
         f.getContentPane().setBackground(Color.WHITE);
 
         f.setSize(1920+25, 1080);
@@ -136,7 +132,7 @@ class login  implements ActionListener{
                 f.setVisible(false);
             }else{
                 JOptionPane.showMessageDialog(null, "Invalid login");
-                f.setVisible(false);
+                f.dispose();
                 login d=new login();
                 
             }
@@ -146,9 +142,10 @@ class login  implements ActionListener{
         }
         }
         else if(ae.getSource()==b2){
+            
+            new Front_Page().f.setVisible(true);
             f.setVisible(false);
             f.dispose();
-            new Front_Page().f.setVisible(true);
         }
     }
     public static void main(String[] arg){

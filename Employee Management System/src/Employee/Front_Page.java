@@ -16,8 +16,7 @@ class Front_Page implements ActionListener{
     JButton b,b1,b2;
 
     Front_Page(){
-
-         
+        
         f=new JFrame("Employee Management System");
         f.setBackground(Color.red);
         f.setLayout(null);
@@ -42,8 +41,9 @@ class Front_Page implements ActionListener{
         b.setFont(new Font("solaris-2",Font.BOLD,20));
          b.setFocusable(false);
         b.addActionListener(this);
-        f.add(b);
-//        
+        f.add(b);    
+        
+        
         b1 = new JButton("USER");
         b1.setOpaque(false);
         b1.setContentAreaFilled(false);
@@ -54,7 +54,7 @@ class Front_Page implements ActionListener{
         b1.setFocusable(false);
         b1.addActionListener(this);
         f.add(b1);
-//       
+        
         id=new JLabel();
         id.setBounds(35,20,1360,750);
         
@@ -84,12 +84,16 @@ class Front_Page implements ActionListener{
 
         if(ae.getSource()==b){
             
-            f.setVisible(false);
+            
            new login().f.setVisible(true);    
+          f.setVisible(false);
+         
         }
         else if (ae.getSource()==b1){
-        f.setVisible(false);
-        new user().f.setVisible(true);}
+        
+        new user().f.setVisible(true);
+        f.setVisible(false);}
+        
     }
 
     public static void main(String[] arg){
