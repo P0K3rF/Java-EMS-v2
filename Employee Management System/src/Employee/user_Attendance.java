@@ -17,16 +17,11 @@ public class user_Attendance implements ActionListener{
    
     
     user_Attendance(String name){
-        
-        
-        
+             
         f=new JFrame("");
         f.setBackground(Color.red);
         f.setLayout(null);
-       
-        
-        
-        
+               
      emp_id=name;
      l1=new JLabel(emp_id);
      l1.setBounds(600,50,100,30);
@@ -40,41 +35,34 @@ public class user_Attendance implements ActionListener{
         LocalDate myDateObj = LocalDate.now();
     DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
     String DDate = myDateObj.format(myFormatObj);
-         try{
-            conn c1=new conn();
-                String ntr="Select * from attendance where emp_id='"+testempid+"'";
-                ResultSet crs=c1.s.executeQuery(ntr);
-                if(crs.next()==false){
-                     b1=new JButton("IN");
-                    b1.setVisible(true);
+    b1=new JButton("IN");
+                    b1.setVisible(false);
         b1.setBounds(150, 20,100, 30);
         b1.addActionListener(this);
         f.add(b1);
+         try{
+            conn c1=new conn();
+                String ntr="Select * from attendance where emp_id='"+testempid+"' AND checkin_date='"+DDate+"'";
+                ResultSet crs=c1.s.executeQuery(ntr);
+             
+                if(crs.next()){
+                    semmpid=crs.getString("emp_id");
+                    inttime=crs.getString("chenkin_time");
+                    inddate=crs.getString("checkin_date"); 
+                   
+                    if(semmpid.equals(testempid) && inddate.equals(DDate)){
+                        b1.setVisible(false);
+                     
+                    }
+                    else{
+                    
+                        b1.setVisible(true);
+                    }          
                 }
                 else{
-                     try{
-            conn c12=new conn();
-                String ptr="Select * from attendance where emp_id='"+testempid+"'";
-                ResultSet prs=c12.s.executeQuery(ptr);
+                    b1.setVisible(true);
+                }
                 
-                while(prs.next()){
-                    
-                    semmpid=prs.getString("emp_id");
-                    inttime=prs.getString("chenkin_time");
-                    inddate=prs.getString("checkin_date");   
-                    JOptionPane.showMessageDialog(null,inttime);
-                }    
-                if(inddate.equals(DDate)){
-                         b1.setVisible(false);
-                     }
-                     else{                      
-                         b1.setVisible(true);
-                     }
-                }
-                     catch(Exception ee){  
-                     }
-                   
-                }
                 
          }
         catch(Exception ee){
@@ -158,14 +146,17 @@ public class user_Attendance implements ActionListener{
                     JOptionPane.showMessageDialog(null,"You havent Checkedin Today");
                 }
             }
+            else{
+                
+            }
         }
         catch(Exception ee){
                 System.out.println("The error is:"+ee);
         }
      
-        if(ae.getSource()==b2){
-            b2.setVisible(false);
-        }
+//        if(ae.getSource()==b2){
+//            b2.setVisible(false);
+//        }
     }
     public static void main(String[] arg){
         user_Attendance u=new user_Attendance("");
