@@ -58,10 +58,10 @@ class user implements ActionListener{
         l4.add(l6);
        
         
-        l1=new JLabel("Username");
+        l1=new JLabel("Employee ID");
         l1.setForeground(Color.BLACK);
         l1.setFont(new Font("solaris-2", Font.ROMAN_BASELINE,20));
-        l1.setBounds(20, 130,100, 30);
+        l1.setBounds(20, 130,140, 30);
         l4.add(l1);
         
         l2=new JLabel("Password");
