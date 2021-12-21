@@ -24,8 +24,9 @@ class Front_Page implements ActionListener{
        
         
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/frontpage.jpg"));
-        Image i2 = i1.getImage().getScaledInstance(1920,1080,Image.SCALE_DEFAULT);
-        ImageIcon i3 = new ImageIcon(i2);
+        Image i2 = i1.getImage().getScaledInstance(1921,1080,Image.SCALE_DEFAULT);
+        ImageIcon i3 =  new ImageIcon(i2);
+        
         JLabel l1 = new JLabel(i3);
         
         l1.setBounds(0,0,1920,1080);
@@ -73,7 +74,7 @@ class Front_Page implements ActionListener{
         f.getContentPane().setBackground(Color.WHITE);
       
 //        f.setExtendedState(f.MAXIMIZED_BOTH);
-        f.setSize(1920+25, 1080);
+        f.setSize(1920, 1080);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         f.setLocation(dim.width/2-f.getSize().width/2, dim.height/2-f.getSize().height/2);
         

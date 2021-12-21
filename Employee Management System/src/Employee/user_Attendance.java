@@ -133,7 +133,6 @@ public class user_Attendance implements ActionListener{
                 while(pq.next()){
                     
                     remaining=pq.getString("remainng_time");
-                    JOptionPane.showMessageDialog(null,"value"+remaining);
         }
                 String sp="update attendance SET salary='"+remaining+"' where emp_id='"+empid+"' AND salary='null'";
                 cc.s.executeUpdate(sp);

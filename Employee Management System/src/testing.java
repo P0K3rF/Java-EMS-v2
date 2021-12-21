@@ -15,6 +15,8 @@ import java.time.Duration;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.*;
 
 public class testing {
@@ -29,24 +31,23 @@ public class testing {
         f.setBackground(Color.red);
         f.setLayout(null);
         
-         t1=new JTextField();
-        t1.setBounds(400,50,100,30);
-        t1.setText(checkin);
-        f.add(t1);
-        f.getContentPane().setBackground(Color.WHITE);
+         f.getContentPane().setBackground(Color.WHITE);
         f.setVisible(true);
-        f.setSize(1600,1600);
+        f.setSize(800,500);
         f.setLocation(400,300);
         
+        LocalDate myDateObj = LocalDate.now();
+    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+    String DDate = myDateObj.format(myFormatObj);
         try{
             
    conn c1= new conn();
-   String query="Select * from attendance where emp_id=101";
+   String query="Select * from attendance where emp_id=102";
    ResultSet rs = c1.s.executeQuery(query);
-   while(rs.next()){
-       checkin=rs.getString("chenkin_time");
-       checkout=rs.getString("checkout_time");
-       
+   
+   if(rs.next()){
+       String checkindate=rs.getString("checkin_date");
+       JOptionPane.showMessageDialog(null, checkindate);
    }
    
    

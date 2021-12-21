@@ -142,8 +142,8 @@ class user implements ActionListener{
                }
             else{
                 JOptionPane.showMessageDialog(null, "Invalid login");
-                f.dispose();
                 user u1=new user();
+                f.dispose();
             }
         }
             catch(Exception e){
