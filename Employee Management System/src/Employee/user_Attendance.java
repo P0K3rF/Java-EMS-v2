@@ -116,10 +116,11 @@ public class user_Attendance implements ActionListener{
                 }
                    
             if(ae.getSource()==b1){
-               
+                
                 conn cc = new conn();
                 String q="insert into attendance values('"+empid+"','"+Time+"','"+Date+"','null','null','null')";
                 cc.s.executeUpdate(q);
+                b1.setVisible(false);
             }
             
             if(ae.getSource()==b2){

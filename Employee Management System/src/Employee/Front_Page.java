@@ -24,9 +24,8 @@ class Front_Page implements ActionListener{
        
         
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/frontpage.jpg"));
-        Image i2 = i1.getImage().getScaledInstance(1921,1080,Image.SCALE_DEFAULT);
+        Image i2 = i1.getImage().getScaledInstance(1920,1080,Image.SCALE_DEFAULT);
         ImageIcon i3 =  new ImageIcon(i2);
-        
         JLabel l1 = new JLabel(i3);
         
         l1.setBounds(0,0,1920,1080);
@@ -42,7 +41,7 @@ class Front_Page implements ActionListener{
         b.setFont(new Font("solaris-2",Font.BOLD,20));
          b.setFocusable(false);
         b.addActionListener(this);
-        f.add(b);    
+        b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         
         b1 = new JButton("USER");
@@ -54,7 +53,8 @@ class Front_Page implements ActionListener{
         b1.setFont(new Font("solaris-2",Font.BOLD,20));
         b1.setFocusable(false);
         b1.addActionListener(this);
-        f.add(b1);
+        b1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
         
         id=new JLabel();
         id.setBounds(35,20,1360,750);
@@ -65,10 +65,8 @@ class Front_Page implements ActionListener{
         lid.setFont(new Font("solaris-2", Font.BOLD,35));
         lid.setForeground(Color.WHITE);
         l1.add(lid);
-//
         l1.add(b);
         l1.add(b1);
-        f.add(l1);
 
                
         f.getContentPane().setBackground(Color.WHITE);

@@ -139,14 +139,14 @@ class Add_Employee implements ActionListener{
         t11.setBounds(200,400,150,30);
         id15.add(t11);
         
-        id18= new JLabel("Password");
-        id18.setBounds(400,400,100,30);
-        id18.setFont(new Font("serif",Font.BOLD,20));
-        id15.add(id18);
-
-        t14=new JTextField();
-        t14.setBounds(600,400,150,30);
-        id15.add(t14);
+//        id18= new JLabel("Password");
+//        id18.setBounds(400,400,100,30);
+//        id18.setFont(new Font("serif",Font.BOLD,20));
+//        id15.add(id18);
+//
+//        t14=new JTextField();
+//        t14.setBounds(600,400,150,30);
+//        id15.add(t14);
 
         
 
@@ -193,11 +193,11 @@ class Add_Employee implements ActionListener{
         String i = t9.getText();
         String j = t10.getText();
         String k = t11.getText();
-        String l= t14.getText();
+//        String l= t14.getText();
         if(ae.getSource() == b){
             try{
                 conn cc = new conn();
-                String q = "insert into employee values('"+a+"','"+bb+"','"+c+"','"+d+"','"+e+"','"+ff+"','"+g+"','"+h+"','"+i+"','"+j+"','"+k+"')";
+                String q = "insert into employee values('"+a+"','"+bb+"','"+c+"','"+d+"','"+e+"','"+ff+"','"+g+"','"+h+"','"+i+"','"+j+"','"+k+"','null')";
                cc.s.executeUpdate(q); 
                 JOptionPane.showMessageDialog(null,"Details Successfully Inserted");
                 f.setVisible(false);

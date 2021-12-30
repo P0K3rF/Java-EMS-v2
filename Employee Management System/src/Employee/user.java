@@ -18,8 +18,8 @@ class user implements ActionListener{
     JFrame f;
     JLabel l1,l2;
     JTextField t1;
-    JPasswordField t2;
-    JButton b1,b2;
+JPasswordField t2;
+    JButton b1,b2,b3,b4;
     
     user(){
         f=new JFrame("User");
@@ -96,23 +96,58 @@ class user implements ActionListener{
         b1.addActionListener(this);
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
+        b1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         l4.add(b1);
         
         b2=new JButton("Go to Home Menu");
-        b2.setBounds(180,430,200,40);
+        b2.setBounds(1580,800,400,80);
          b2.setOpaque(false);
         b2.setContentAreaFilled(false);
         b2.setBorderPainted(false);
-        b2.setFont(new Font("solaris-2",Font.BOLD,15));
+        b2.setFont(new Font("serif",Font.ROMAN_BASELINE,30));
         
         Font font = b2.getFont();
          Map attributes = font.getAttributes();
         attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         b2.setFont(font.deriveFont(attributes));
         b2.setBackground(Color.BLACK);
-        b2.setForeground(Color.BLACK);
+        b2.setForeground(Color.WHITE);
         b2.addActionListener(this);
-        l4.add(b2);
+        b2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        l3.add(b2);
+        
+        b3=new JButton("Create Password");
+        b3.setBounds(0,420,200,50);
+         b3.setOpaque(false);
+        b3.setContentAreaFilled(false);
+        b3.setBorderPainted(false);
+        b3.setFont(new Font("sans serif",Font.ROMAN_BASELINE,20));
+        
+        Font font2 = b3.getFont();
+         Map attributes2 = font2.getAttributes();
+        attributes2.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        b3.setFont(font2.deriveFont(attributes2));
+        b3.setForeground(Color.BLACK);
+        b3.addActionListener(this);
+        b3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        l4.add(b3);
+        
+        b4=new JButton("Forgot Password?");
+        b4.setBounds(190,420,200,50);
+        b4.setOpaque(false);
+        b4.setContentAreaFilled(false);
+        b4.setBorderPainted(false);
+        b4.setFont(new Font("sans serif",Font.ROMAN_BASELINE,20));
+        
+        Font font3 = b4.getFont();
+         Map attributes3 = font3.getAttributes();
+        attributes3.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        b4.setFont(font3.deriveFont(attributes3));
+        b4.setForeground(Color.BLACK);
+        b4.addActionListener(this);
+        b4.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        l4.add(b4);
+        
         
          f.getContentPane().setBackground(Color.WHITE);
 
@@ -130,16 +165,19 @@ class user implements ActionListener{
             String u=t1.getText();
             String v=t2.getText();
           
-            String q="select * from employee where emp_id='"+u+"' and fname='"+v+"'";
+            String q="select * from employee where emp_id='"+u+"' and password='"+v+"'";
             
             ResultSet rs = c1.s.executeQuery(q); 
             if(rs.next()){ 
-               new user_Attendance(t1.getText()).f.setVisible(true); 
+//                new testing(t1.getText()).f.setVisible(true); 
+new UserUI(t1.getText()).f.setVisible(true); 
+//               new user_Attendance(t1.getText()).f.setVisible(true); 
                 f.setVisible(false);
                 f.dispose();           
-//new testing(t1.getText()).f.setVisible(true);   
+
 //new Testing2(t1.getText()).f.setVisible(true);
                }
+            
             else{
                 JOptionPane.showMessageDialog(null, "Invalid login");
                 user u1=new user();
@@ -155,6 +193,14 @@ class user implements ActionListener{
             f.setVisible(false);
             f.dispose();
         }
+                else if (ae.getSource()==b3){
+                    new CreatePassword().f.setVisible(true);
+                    f.setVisible(false);
+                }
+                else if (ae.getSource()==b4){
+                    new ForgotPassword().f.setVisible(true);
+                    f.setVisible(false);
+                }
         
     }
     
