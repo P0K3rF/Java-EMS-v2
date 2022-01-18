@@ -7,7 +7,6 @@ package Employee;
 
 import java.awt.*;
 import javax.swing.*;
-import java.lang.Thread;
 import java.awt.event.*;
 
 class Front_Page implements ActionListener{
@@ -25,7 +24,7 @@ class Front_Page implements ActionListener{
         
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/frontpage.jpg"));
         Image i2 = i1.getImage().getScaledInstance(1920,1080,Image.SCALE_DEFAULT);
-        ImageIcon i3 = new ImageIcon(i2);
+        ImageIcon i3 =  new ImageIcon(i2);
         JLabel l1 = new JLabel(i3);
         
         l1.setBounds(0,0,1920,1080);
@@ -41,7 +40,7 @@ class Front_Page implements ActionListener{
         b.setFont(new Font("solaris-2",Font.BOLD,20));
          b.setFocusable(false);
         b.addActionListener(this);
-        f.add(b);    
+        b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         
         b1 = new JButton("USER");
@@ -53,7 +52,8 @@ class Front_Page implements ActionListener{
         b1.setFont(new Font("solaris-2",Font.BOLD,20));
         b1.setFocusable(false);
         b1.addActionListener(this);
-        f.add(b1);
+        b1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
         
         id=new JLabel();
         id.setBounds(35,20,1360,750);
@@ -64,16 +64,14 @@ class Front_Page implements ActionListener{
         lid.setFont(new Font("solaris-2", Font.BOLD,35));
         lid.setForeground(Color.WHITE);
         l1.add(lid);
-//
         l1.add(b);
         l1.add(b1);
-        f.add(l1);
 
                
         f.getContentPane().setBackground(Color.WHITE);
       
 //        f.setExtendedState(f.MAXIMIZED_BOTH);
-        f.setSize(1920+25, 1080);
+        f.setSize(1920, 1080);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         f.setLocation(dim.width/2-f.getSize().width/2, dim.height/2-f.getSize().height/2);
         
