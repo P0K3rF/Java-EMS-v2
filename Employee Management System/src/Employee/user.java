@@ -170,7 +170,8 @@ JPasswordField t2;
             ResultSet rs = c1.s.executeQuery(q); 
             if(rs.next()){ 
 //                new testing(t1.getText()).f.setVisible(true); 
-new UserUI(t1.getText()).f.setVisible(true); 
+//new UserUI(t1.getText()).f.setVisible(true);
+new Usertestinginterface(t1.getText()).f.setVisible(true);
 //               new user_Attendance(t1.getText()).f.setVisible(true); 
                 f.setVisible(false);
                 f.dispose();           

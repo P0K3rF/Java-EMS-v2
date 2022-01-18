@@ -26,10 +26,12 @@ import javax.swing.border.Border;
 
 public class UserUI implements ActionListener {
 
+     
+    
     Calendar calendar;
     SimpleDateFormat timeFormat,dayFormat,dateFormat;
     JFrame f;
-    JButton b1, b2,b3,b4;
+    JButton b1, b2,b3,b4,refreshb;
     JLabel l1,l2,lname,lemail,lempid,ldob,leducation,lpost,lphoneno,rsname,rsemail,rsempid,rsdob,rseducation,rspost,rsphoneno,
             timelabel,daylabel,datelabel;
     JPanel p1,p2,p3,p4;
@@ -45,8 +47,6 @@ public class UserUI implements ActionListener {
             ResultSet rs= con.s.executeQuery(str);
 
             while(rs.next()){
-
-               
                 name = rs.getString("name");
                 father = rs.getString("fname");
                 age = rs.getString("age");
@@ -115,7 +115,7 @@ public class UserUI implements ActionListener {
         l2.setBounds(1450, 30,180, 50);
           
         //ADDING AN CHANGABLE JLABEL TO CHILD JPANEL 
-        ImageIcon i13 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/Main panel(1).png"));
+        ImageIcon i13 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/purple Main panel.png"));
         Image i7 = i13.getImage().getScaledInstance(1700,830,Image.SCALE_DEFAULT);
         ImageIcon i6 =  new ImageIcon(i7);
         JLabel l5=new JLabel(i6); 
@@ -204,6 +204,17 @@ public class UserUI implements ActionListener {
         rsphoneno.setFont(new Font("solaris-2", Font.BOLD,35));
         rsphoneno.setBounds(400,580,250,50);
         
+        refreshb=new JButton("Refresh");
+        refreshb.setBounds(800, 580, 100, 50);
+        refreshb.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                f.setVisible(false);
+                
+                new UserUI(l2.getText());
+            }
+        });
+        l5.add(refreshb);
         l5.add(lname);
         l5.add(lempid);
         l5.add(lemail);

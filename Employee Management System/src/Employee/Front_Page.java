@@ -7,7 +7,6 @@ package Employee;
 
 import java.awt.*;
 import javax.swing.*;
-import java.lang.Thread;
 import java.awt.event.*;
 
 class Front_Page implements ActionListener{

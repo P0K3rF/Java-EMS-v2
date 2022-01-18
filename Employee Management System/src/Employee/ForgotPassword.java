@@ -3,16 +3,17 @@ package Employee;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -28,27 +29,44 @@ import javax.swing.border.LineBorder;
 public class ForgotPassword implements ActionListener {
     
     JFrame f;
-    JLabel l1,l2,l3;
+    JLabel l1,l2,l3,l5;
+    JLabel crnp;
     JTextField t1,t2;
-    JButton b1,b2;
+    JButton b1,b2,b3;
     int randomnumber;
     
     ForgotPassword(){
         
         f = new JFrame("Forgot Password");
         f.setLayout(null);
-        f.setBounds(0, 0, 630, 580);
-        f.setResizable(false);
+
+        ImageIcon i11 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/forgetpassbg.jpg"));
+        Image img12 = i11.getImage().getScaledInstance(1945, 1080, Image.SCALE_DEFAULT);
+        ImageIcon i10 = new ImageIcon(img12);
+        l5 = new JLabel(i10);
+        l5.setBounds(0, 0, 1945, 1080);
+        l5.setLayout(null);
+        f.add(l5);
         
         ImageIcon i12 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/createpassword.png"));
-        Image i5 = i12.getImage().getScaledInstance(630, 550, Image.SCALE_DEFAULT);
+        Image i5 = i12.getImage().getScaledInstance(670, 600, Image.SCALE_DEFAULT);
         ImageIcon i4 = new ImageIcon(i5);
         l1 = new JLabel(i4);
-        l1.setBounds(0, 0, 630, 550);
-        f.add(l1);
+        l1.setBounds(600,200, 670, 600);
+        l5.add(l1);
+        
+        crnp=new JLabel("Forget Password");
+        crnp.setBounds(180,5,500, 60);
+        crnp.setFont(new Font("sans serif", Font.BOLD, 30));
+        Font font1 = crnp.getFont();
+        Map attributes1 = font1.getAttributes();
+        attributes1.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        crnp.setFont(font1.deriveFont(attributes1));
+        crnp.setForeground(Color.BLACK);
+        l1.add(crnp);
         
         l2 = new JLabel("Email ID");
-        l2.setBounds(100, 80, 400, 40);
+        l2.setBounds(100, 90, 400, 40);
         l2.setFont(new Font("sans serif", Font.BOLD, 25));
         l2.setForeground(Color.BLACK);
         
@@ -59,7 +77,7 @@ public class ForgotPassword implements ActionListener {
         t1.setBorder(new LineBorder(Color.BLACK, 3, true));
         
         b2 = new JButton("Send Code");
-        b2.setBounds(130, 200, 150, 50);
+        b2.setBounds(130, 220, 150, 50);
         b2.setFont(new Font("serif", Font.ROMAN_BASELINE, 20));
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.WHITE);
@@ -69,7 +87,8 @@ public class ForgotPassword implements ActionListener {
             public void actionPerformed(ActionEvent ae) {
              
                 
-                try{Random randno=new Random();
+                try{
+                    Random randno=new Random();
              randomnumber=randno.nextInt(999999);
              String host="smtp.gmail.com";
              String user="employeemanagementsystem12@gmail.com";
@@ -83,6 +102,7 @@ public class ForgotPassword implements ActionListener {
              pros.put("mail.smtp.host","host"); 
              pros.put("mail.smtp.port", "587");
              pros.put("mail.smtp.auth","true");
+             pros.put("mail.smtp.ssl.trust", "smtp.gmail.com");
              pros.put("mail.smtp.starttls.required","true");
              java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
              Session mailSession=Session.getDefaultInstance(pros,null);
@@ -107,18 +127,18 @@ public class ForgotPassword implements ActionListener {
         });
         
         l3 = new JLabel("Verify Code");
-        l3.setBounds(100, 280, 230, 40);
+        l3.setBounds(100, 307, 230, 40);
         l3.setFont(new Font("sans serif", Font.BOLD, 25));
         l3.setForeground(Color.BLACK);
         
         t2 = new JTextField();
-        t2.setBounds(130, 330, 350, 50);
+        t2.setBounds(130, 360, 350, 50);
         t2.setFont(new Font("sans serif", Font.ROMAN_BASELINE, 30));
         t2.setForeground(Color.black);
         t2.setBorder(new LineBorder(Color.BLACK, 3, true));
         
         b1 = new JButton("Verify");
-        b1.setBounds(200, 410, 200, 50);
+        b1.setBounds(130, 440, 200, 50);
         b1.setFont(new Font("serif", Font.ROMAN_BASELINE, 25));
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
@@ -140,6 +160,21 @@ public class ForgotPassword implements ActionListener {
             }
         });
        
+        b3 = new JButton("Cancel");
+        b3.setBounds(350, 440, 200, 50);
+        b3.setFont(new Font("serif", Font.ROMAN_BASELINE, 25));
+        b3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+            new user().f.setVisible(true);
+            f.setVisible(false);
+            f.dispose();
+        }
+            
+        });
+        b3.setBackground(Color.BLACK);
+        b3.setForeground(Color.WHITE);
+        b3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         l1.add(l2);
         l1.add(t1);
@@ -147,7 +182,11 @@ public class ForgotPassword implements ActionListener {
         l1.add(l3);
         l1.add(t2);
         l1.add(b1);
-        f.setLocationRelativeTo(null);
+        l1.add(b3);
+        
+        f.setSize(1920 + 25, 1080);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        f.setLocation(dim.width / 2 - f.getSize().width / 2, dim.height / 2 - f.getSize().height / 2);
         f.setVisible(true);
         
     }

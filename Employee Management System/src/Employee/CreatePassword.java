@@ -2,11 +2,15 @@ package Employee;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
 import java.sql.ResultSet;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,7 +23,8 @@ import javax.swing.border.LineBorder;
 public class CreatePassword implements ActionListener {
 
     JFrame f;
-    JLabel l1, l2, l3, l4;
+    JLabel l1, l2, l3, l4,l5;
+    JLabel crnp;
     JButton b1, b2;
     JTextField t1;
     JPasswordField t2, t3;
@@ -29,15 +34,31 @@ public class CreatePassword implements ActionListener {
     CreatePassword() {
         f = new JFrame("Create Password");
         f.setLayout(null);
-        f.setBounds(0, 0, 670, 630);
-        f.setResizable(false);
-
+ 
+        ImageIcon i11 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/forgetbg.jpg"));
+        Image img12 = i11.getImage().getScaledInstance(1945, 1080, Image.SCALE_DEFAULT);
+        ImageIcon i10 = new ImageIcon(img12);
+        l5 = new JLabel(i10);
+        l5.setBounds(0, 0, 1945, 1080);
+        l5.setLayout(null);
+        f.add(l5);
+        
         ImageIcon i12 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/createpassword.png"));
         Image i5 = i12.getImage().getScaledInstance(670, 600, Image.SCALE_DEFAULT);
         ImageIcon i4 = new ImageIcon(i5);
         l1 = new JLabel(i4);
-        l1.setBounds(0, 0, 670, 600);
-        f.add(l1);
+        l1.setBounds(600,200, 670, 600);
+        l5.add(l1);
+        
+        crnp=new JLabel("Create New Password");
+        crnp.setBounds(180,5,500, 60);
+        crnp.setFont(new Font("sans serif", Font.BOLD, 30));
+        Font font1 = crnp.getFont();
+        Map attributes1 = font1.getAttributes();
+        attributes1.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        crnp.setFont(font1.deriveFont(attributes1));
+        crnp.setForeground(Color.BLACK);
+        l1.add(crnp);
 
         l2 = new JLabel("EMP ID");
         l2.setBounds(100, 70, 120, 40);
@@ -180,7 +201,11 @@ public class CreatePassword implements ActionListener {
         l1.add(b2);
         l1.add(b3);
         l1.add(b5);
-        f.setLocationRelativeTo(null);
+      
+        
+        f.setSize(1920 + 25, 1080);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        f.setLocation(dim.width / 2 - f.getSize().width / 2, dim.height / 2 - f.getSize().height / 2);
         f.setVisible(true);
 
     }

@@ -24,7 +24,6 @@ class login  implements ActionListener{
     login(){
 
         f=new JFrame("Login");
-
         f.setBackground(Color.white);
         f.setLayout(null);
 
@@ -78,10 +77,11 @@ class login  implements ActionListener{
         b1.addActionListener(this);
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
+        b1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         f.add(b1);
 
         b2=new JButton("Go to Home Menu");
-        b2.setBounds(830,690,200,40);
+        b2.setBounds(830,710,163,20);
          b2.setOpaque(false);
         b2.setContentAreaFilled(false);
         b2.setBorderPainted(false);
@@ -93,6 +93,7 @@ class login  implements ActionListener{
         b2.setBackground(Color.BLACK);
         b2.setForeground(Color.BLACK);
         b2.addActionListener(this);
+        b2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         f.add(b2);
         
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/admin_login.png"));
@@ -132,7 +133,7 @@ class login  implements ActionListener{
             
             ResultSet rs = c1.s.executeQuery(q); 
             if(rs.next()){
-                new details().f.setVisible(true);
+                new Admin_homepage().f.setVisible(true);
                 f.setVisible(false);
             }else{
                 JOptionPane.showMessageDialog(null, "Invalid login");

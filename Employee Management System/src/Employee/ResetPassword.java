@@ -3,11 +3,15 @@ package Employee;
 
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
 import java.sql.ResultSet;
+import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,7 +22,8 @@ import javax.swing.border.LineBorder;
 
 public class ResetPassword implements ActionListener {
     JFrame f;
-    JLabel l1,l2,l3;
+    JLabel l1,l2,l3,l5;
+    JLabel crnp;
     JButton b1,b2,b3,b4,b5,b6;
     JPasswordField t1,t2;
     String empemail,dbemail,dbpass;
@@ -27,23 +32,40 @@ public class ResetPassword implements ActionListener {
         empemail=email_id;
         f = new JFrame("Forgot Password");
         f.setLayout(null);
-        f.setBounds(0, 0, 630, 580);
-        f.setResizable(false);
+
+        
+        ImageIcon i11 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/forgetpassbg.jpg"));
+        Image img12 = i11.getImage().getScaledInstance(1945, 1080, Image.SCALE_DEFAULT);
+        ImageIcon i10 = new ImageIcon(img12);
+        l5 = new JLabel(i10);
+        l5.setBounds(0, 0, 1945, 1080);
+        l5.setLayout(null);
+        f.add(l5);
         
         ImageIcon i12 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/createpassword.png"));
-        Image i5 = i12.getImage().getScaledInstance(630, 550, Image.SCALE_DEFAULT);
+        Image i5 = i12.getImage().getScaledInstance(670, 600, Image.SCALE_DEFAULT);
         ImageIcon i4 = new ImageIcon(i5);
         l1 = new JLabel(i4);
-        l1.setBounds(0, 0, 630, 550);
-        f.add(l1);
+        l1.setBounds(600,200, 670, 600);
+        l5.add(l1);
+        
+        crnp=new JLabel("Reset Password");
+        crnp.setBounds(200,5,500, 60);
+        crnp.setFont(new Font("sans serif", Font.BOLD, 30));
+        Font font1 = crnp.getFont();
+        Map attributes1 = font1.getAttributes();
+        attributes1.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        crnp.setFont(font1.deriveFont(attributes1));
+        crnp.setForeground(Color.BLACK);
+        l1.add(crnp);
         
         l2 = new JLabel("New Password");
-        l2.setBounds(100, 90, 200, 40);
+        l2.setBounds(100, 110, 200, 40);
         l2.setFont(new Font("sans serif", Font.BOLD, 25));
         l2.setForeground(Color.BLACK);
         
         t1 = new JPasswordField();
-        t1.setBounds(130, 150, 350, 50);
+        t1.setBounds(130, 170, 350, 50);
         t1.setFont(new Font("sans serif", Font.ROMAN_BASELINE, 30));
         t1.setForeground(Color.black);
         t1.setBorder(new LineBorder(Color.BLACK, 3, true));
@@ -52,7 +74,7 @@ public class ResetPassword implements ActionListener {
         Image i1 = i13.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
         ImageIcon il4 = new ImageIcon(i1);
         b3 = new JButton(il4);
-        b3.setBounds(490, 160, 30, 30);
+        b3.setBounds(490, 180, 30, 30);
         b3.setOpaque(false);
         b3.setContentAreaFilled(false);
         b3.setBorderPainted(false);
@@ -88,12 +110,12 @@ public class ResetPassword implements ActionListener {
         });
         
         l3 = new JLabel("Confirm password");
-        l3.setBounds(100, 230, 230, 40);
+        l3.setBounds(100, 260, 230, 40);
         l3.setFont(new Font("sans serif", Font.BOLD, 25));
         l3.setForeground(Color.BLACK);
         
         t2 = new JPasswordField();
-        t2.setBounds(130, 290, 350, 50);
+        t2.setBounds(130, 320, 350, 50);
         t2.setFont(new Font("sans serif", Font.ROMAN_BASELINE, 30));
         t2.setForeground(Color.black);
         t2.setBorder(new LineBorder(Color.BLACK, 3, true));
@@ -102,7 +124,7 @@ public class ResetPassword implements ActionListener {
         Image i3 = i15.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
         ImageIcon il6 = new ImageIcon(i3);
         b5 = new JButton(il6);
-        b5.setBounds(490, 300, 30, 30);
+        b5.setBounds(490, 330, 30, 30);
         b5.setOpaque(false);
         b5.setContentAreaFilled(false);
         b5.setBorderPainted(false);
@@ -139,7 +161,7 @@ public class ResetPassword implements ActionListener {
         });
         
         b1 = new JButton("Set Password");
-        b1.setBounds(100, 390, 250, 50);
+        b1.setBounds(100, 420, 250, 50);
         b1.setFont(new Font("serif", Font.ROMAN_BASELINE, 25));
         b1.addActionListener(new ActionListener() {
             @Override
@@ -157,7 +179,6 @@ public class ResetPassword implements ActionListener {
                             }
                             if(dbemail.equals(empemail) && dbpass.equals("null")){
                                 JOptionPane.showMessageDialog(null, "You haven't Create Your Password Yet");
-                               
                                 new user().f.setVisible(true);
                                 f.setVisible(false);
                                f.dispose();
@@ -190,7 +211,7 @@ public class ResetPassword implements ActionListener {
         b1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         b2 = new JButton("Cancel");
-        b2.setBounds(390, 390, 150, 50);
+        b2.setBounds(390, 420, 150, 50);
         b2.setFont(new Font("serif", Font.ROMAN_BASELINE, 25));
         b2.addActionListener(this);
         b2.setBackground(Color.BLACK);
@@ -205,8 +226,12 @@ public class ResetPassword implements ActionListener {
         l1.add(b5);
         l1.add(b1);
         l1.add(b2);
-        f.setLocationRelativeTo(null);
+        
+        f.setSize(1920 + 25, 1080);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        f.setLocation(dim.width / 2 - f.getSize().width / 2, dim.height / 2 - f.getSize().height / 2);
         f.setVisible(true);
+        
     }
     @Override
     public void actionPerformed(ActionEvent ae) {
