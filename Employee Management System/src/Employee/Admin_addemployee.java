@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 public class Admin_addemployee implements ActionListener {
     JFrame f;
@@ -364,13 +365,15 @@ public class Admin_addemployee implements ActionListener {
         if(ae.getSource() == b1){
             if(a.isEmpty()||bb.isEmpty()||c.isEmpty()||d.isEmpty()||e.isEmpty()||ff.isEmpty()||g.isEmpty()||h.isEmpty()||i.isEmpty()||j.isEmpty()||k.isEmpty()){
                JOptionPane.showMessageDialog(null, "Fill Every Details"); 
+
             }
             else{
                 try{
                 conn cc = new conn();
                 String q = "insert into employee values('"+a+"','"+bb+"','"+c+"','"+d+"','"+e+"','"+ff+"','"+g+"','"+h+"','"+i+"','"+j+"','"+k+"','null','null')";
                cc.s.executeUpdate(q); 
-                JOptionPane.showMessageDialog(null,"Details Successfully Inserted");
+               
+                 JOptionPane.showMessageDialog(null,"Details Successfully Inserted");
                 new Admin_homepage().f.setVisible(true);
                 f.setVisible(false);
             }catch(HeadlessException | SQLException ee){

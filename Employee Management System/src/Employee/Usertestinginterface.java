@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Employee;
 
 import com.toedter.calendar.JDateChooser;
@@ -31,8 +26,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
@@ -49,7 +42,7 @@ public class Usertestinginterface {
             lupdate, lok, ltime, lswingtime, lday, lswingday, ldate, lswingdate, lopcheckin, lmarkatt, lprofile, lattprofile, leaveemp, leaveemail, leavesdate, leaveedate, leavesubject, leavedesc, leavecatg, othercatg, leaveprofile, lmsg, lmsg1, lmsg2;
     JPanel mainpanel, p1, p2, p3, p4, p5, p6, attendancelabel, upperpanel, attchildlabel, leavepanel, leavechildpanel, notpanel, notchildpanel;
     String emp_id, name, father, address, phone, email, education, post, age, dob, aadhar;
-    JButton b1, b2, b3, b4, updateb, saveb, cancelb, checkinb, checkoutb, addprofileb, saveprofileb, applyleave, seenb, not, notrefb, logout;
+    JButton b1, b2, b3, b4, updateb, saveb, cancelb, checkinb, checkoutb, addprofileb, saveprofileb, applyleave, seenb, not, not1, not2, notrefb, logout;
     JTextField tname, tfname, temail, tdob, tphoneno, tcatg;
     JTextField t1emp, t1email;
     String Stname, Stfname, Stemail, Stdob, Stphoneno;
@@ -332,7 +325,7 @@ public class Usertestinginterface {
             }
 
         } catch (SQLException ex) {
-           
+
         }
 
         //Adding buttons under profile label to upload photo which will get trigger after clicking on update button
@@ -376,7 +369,6 @@ public class Usertestinginterface {
                     saveprofileb.setVisible(false);
 //                    
                 } catch (Exception ex) {
-                    
 
                 }
             }
@@ -800,7 +792,7 @@ public class Usertestinginterface {
             }
 
         } catch (SQLException ex) {
-            
+
         }
 
         //Creating Label to display when user has already checked in 
@@ -1085,7 +1077,7 @@ public class Usertestinginterface {
             }
 
         } catch (SQLException ex) {
-            
+
         }
 
         //Adding From and To Date with respective labels
@@ -1488,6 +1480,18 @@ public class Usertestinginterface {
         });
         p1.add(b4);
 
+        ImageIcon i124 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/notification1.png"));
+        not1 = new JButton();
+        not1.setIcon(i124);
+        not1.setVisible(false);
+        not1.setBounds(200, 570, 30, 30);
+        not1.setBackground(new Color(0, 0, 57));
+        not1.setFocusPainted(false);
+        not1.setBorder(null);
+        not1.setContentAreaFilled(false);
+        not1.setFocusable(false);
+        p1.add(not1);
+
         //Adding notification alert button
         ImageIcon i123 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/notification.png"));
         not = new JButton();
@@ -1499,114 +1503,132 @@ public class Usertestinginterface {
         not.setBorder(null);
         not.setContentAreaFilled(false);
         not.setFocusable(false);
-        not.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         p1.add(not);
 
         try {
-            conn p = new conn();
-            String query = "Select * from salary where emp_id='" + emp_id + "' and status='unseen'";
+            conn p10 = new conn();
+            String q10 = "Select * from salary where emp_id='" + emp_id + "' and status='unseen'";
+            ResultSet st = p10.s.executeQuery(q10);
+            if (st.next()) {
+                not.setVisible(true);
+                b4.setBounds(0, 570, 200, 70);
 
-            ResultSet st = p.s.executeQuery(query);
-            if (!st.next()) {
+            } else {
                 not.setVisible(false);
                 b4.setBounds(0, 570, 230, 70);
-            } else {
-                b4.setBounds(0, 570, 200, 70);
-                not.setVisible(true);
+                try {
+                    conn p = new conn();
+                    String q1 = "Select * from eleave where emp_id='" + emp_id + "' and status1='unseen' and status!='Pending'";
+                    ResultSet st1 = p.s.executeQuery(q1);
+                    if (st1.next()) {
+                        b4.setBounds(0, 570, 200, 70);
+                        not1.setVisible(true);
+
+                    } else {
+                        not1.setVisible(false);
+                        b4.setBounds(0, 570, 230, 70);
+
+                    }
+                } catch (Exception e) {
+
+                }
             }
 
-        } catch (Exception e) {
-
-        }
-        try {
-            conn p = new conn();
-            String q1 = "Select * from eleave where emp_id='" + emp_id + "' and status1='unseen' and status!='Pending'";
-            ResultSet st1 = p.s.executeQuery(q1);
-            if (!st1.next()) {
-                not.setVisible(false);
-                b4.setBounds(0, 570, 230, 70);
-            } else {
-                b4.setBounds(0, 570, 200, 70);
-                not.setVisible(true);
-            }
         } catch (Exception e) {
 
         }
         
         try{
+            conn p = new conn();
+            String st="Select * from salary where emp_id='" + emp_id + "' and status='unseen'";
+            ResultSet es=p.s.executeQuery(st);
+            String q1 = "Select * from eleave where emp_id='" + emp_id + "' and  status1='unseen' and status!='Pending'";
+            ResultSet rss = p.s.executeQuery(q1);
+            if(!es.next()&& !rss.next()){
+                notrefb.setVisible(true);
+                lmsg.setVisible(true);
+            }else{
+                notrefb.setVisible(false);
+                lmsg.setVisible(false);
+            }
+            
+        }catch(Exception e){
+            
+        }
+        
+        try {
             conn c = new conn();
             String q = "Select * from salary where emp_id='" + emp_id + "' and status='unseen'";
             ResultSet rs = c.s.executeQuery(q);
-            if(rs.next()){
-                String query="Select * from salary where emp_id='"+emp_id+"' and status='unseen' limit 3";
-                 ResultSet rs1=c.s.executeQuery(query);
-                 while(rs1.next()){
-                      sal=rs1.getString("salary");
-                      salarr=sal.split("\n");
-                      String sdate=rs1.getString("checkin_date");
-                     String edate=rs1.getString("checkout_date");
-                     sarr=sdate.split("\n");
-                      earr=edate.split("\n");
-                     seenb.setVisible(true);
-                      
-            JLabel[] labels = new JLabel[salarr.length];
-            for (int i = 0; i < salarr.length; i++){
-                labels[i] = new JLabel();
-                labels[i].setBounds(50,v,1500,70);
-                labels[i].setText(b+". "+"  Your Salary from  "+ sarr[i]+"  to  "+earr[i]+ "  is  "+salarr[i]);
-                labels[i].setFont(new Font("solaris-2",Font.ROMAN_BASELINE,30));
-                labels[i].setForeground(new Color(255,255,255));
-                notchildpanel.add(labels[i]);
-                v=v+100;
-                b++;
+            if (rs.next()) {
+                String query = "Select * from salary where emp_id='" + emp_id + "' and status='unseen' limit 3";
+                ResultSet rs1 = c.s.executeQuery(query);
+                while (rs1.next()) {
+                    sal = rs1.getString("salary");
+                    salarr = sal.split("\n");
+                    String sdate = rs1.getString("checkin_date");
+                    String edate = rs1.getString("checkout_date");
+                    sarr = sdate.split("\n");
+                    earr = edate.split("\n");
+                    seenb.setVisible(true);
+
+                    JLabel[] labels = new JLabel[salarr.length];
+                    for (int i = 0; i < salarr.length; i++) {
+                        labels[i] = new JLabel();
+                        labels[i].setBounds(50, v, 1500, 70);
+                        labels[i].setText(b + ". " + "  Your Salary from  " + sarr[i] + "  to  " + earr[i] + "  is  " + salarr[i]);
+                        labels[i].setFont(new Font("solaris-2", Font.ROMAN_BASELINE, 30));
+                        labels[i].setForeground(new Color(255, 255, 255));
+                        notchildpanel.add(labels[i]);
+                        v = v + 100;
+                        b++;
+                    }
+
+                }
+            } else {
             }
-                 
-                 }
-            }
-           
-        }catch(Exception e){
-            
+
+        } catch (Exception e) {
+
         }
-        
-        
-        try{
+
+        try {
             conn c1 = new conn();
-            String q1 = "Select * from eleave where emp_id='"+emp_id+"' and  status1='unseen' and status!='Pending'";
+            String q1 = "Select * from eleave where emp_id='" + emp_id + "' and  status1='unseen' and status!='Pending'";
             ResultSet rss = c1.s.executeQuery(q1);
-            if(rss.next()){
-             String query1 = "Select * from eleave where emp_id='" + emp_id + "' and  status1='unseen' and status!='Pending' limit 3 ";
-                        ResultSet rs2 = c1.s.executeQuery(query1);
-                        while (rs2.next()) {
-                            String catg = rs2.getString("category");
-                            arrcatg = catg.split("\n");
-                            String sdate = rs2.getString("sdate");
-                            sdatearr = sdate.split("\n");
-                            String edate = rs2.getString("edate");
-                            edatearr = edate.split("\n");
-                            String status = rs2.getString("status");
-                            arrstatus = status.split("\n");
-                            seenb.setVisible(true);
+            if (rss.next()) {
+                String query1 = "Select * from eleave where emp_id='" + emp_id + "' and  status1='unseen' and status!='Pending' limit 3 ";
+                ResultSet rs2 = c1.s.executeQuery(query1);
+                while (rs2.next()) {
+                    String catg = rs2.getString("category");
+                    arrcatg = catg.split("\n");
+                    String sdate = rs2.getString("sdate");
+                    sdatearr = sdate.split("\n");
+                    String edate = rs2.getString("edate");
+                    edatearr = edate.split("\n");
+                    String status = rs2.getString("status");
+                    arrstatus = status.split("\n");
+                    seenb.setVisible(true);
 
-                            JLabel[] labels1 = new JLabel[arrcatg.length];
-                            for (int i = 0; i < arrcatg.length; i++) {
-                                labels1[i] = new JLabel();
-                                labels1[i].setBounds(50, x, 1500, 70);
-                                labels1[i].setText(" -- " + "  Your Leave Application of " + arrcatg[i] + " from " + sdatearr[i] + " to " + edatearr[i] + " is " + arrstatus[i]);
-                                labels1[i].setFont(new Font("solaris-2", Font.ROMAN_BASELINE, 30));
-                                labels1[i].setForeground(new Color(255, 255, 255));
-                                notchildpanel.add(labels1[i]);
-                                x = x + 100;
+                    JLabel[] labels1 = new JLabel[arrcatg.length];
+                    for (int i = 0; i < arrcatg.length; i++) {
+                        labels1[i] = new JLabel();
+                        labels1[i].setBounds(50, x, 1500, 70);
+                        labels1[i].setText(" -- " + "  Your Leave Application of " + arrcatg[i] + " from " + sdatearr[i] + " to " + edatearr[i] + " is " + arrstatus[i]);
+                        labels1[i].setFont(new Font("solaris-2", Font.ROMAN_BASELINE, 30));
+                        labels1[i].setForeground(new Color(255, 255, 255));
+                        notchildpanel.add(labels1[i]);
+                        x = x + 100;
 
-                            }
+                    }
 
-                        }
-            }else{
-                notrefb.setVisible(true);
-                lmsg.setVisible(true);
+                }
+            } else {
+
             }
-            
-        }catch(Exception e){
-            
+
+        } catch (Exception e) {
+
         }
 
         //Adding a last divider
@@ -1618,7 +1640,7 @@ public class Usertestinginterface {
         ImageIcon ilogout = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/logout.png"));
         logout = new JButton();
         logout.setIcon(ilogout);
-        logout.setBounds(10, 850,160,60);
+        logout.setBounds(10, 850, 160, 60);
         logout.setBackground(new Color(0, 0, 57));
         logout.setFocusPainted(false);
         logout.setBorder(null);
