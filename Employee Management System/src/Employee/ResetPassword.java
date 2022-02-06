@@ -89,7 +89,7 @@ public class ResetPassword implements ActionListener {
                 Image i2 = i14.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
                 ImageIcon il5 = new ImageIcon(i2);
                 b4 = new JButton(il5);
-                b4.setBounds(490, 160, 30, 30);
+                b4.setBounds(490, 180, 30, 30);
                 b4.setOpaque(false);
                 b4.setContentAreaFilled(false);
                 b4.setBorderPainted(false);
@@ -141,7 +141,7 @@ public class ResetPassword implements ActionListener {
                 ImageIcon il8 = new ImageIcon(i4);
                 b6 = new JButton(il8);
                 b6.setFocusable(true);
-                b6.setBounds(490, 300, 30, 30);
+                b6.setBounds(490, 330, 30, 30);
                 b6.setOpaque(false);
                 b6.setContentAreaFilled(false);
                 b6.setBorderPainted(false);
