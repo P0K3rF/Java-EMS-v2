@@ -216,6 +216,20 @@ public class CreatePassword implements ActionListener {
             if (t1.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Emp id Texfield cannot be empty!");
             }
+            try{
+                conn c=new conn();
+                String q="Select * from employee where emp_id='"+t1.getText()+"'";
+                ResultSet rs1=c.s.executeQuery(q);
+                if(!rs1.next() && !t1.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Incorrect Empid");
+                }
+                
+                
+            }catch(Exception e){
+                
+            }
+            
+            
             if (!t2.getText().isEmpty() && !t3.getText().isEmpty()) {
                 if (t2.getText().equals(t3.getText())) {
 
@@ -238,7 +252,7 @@ public class CreatePassword implements ActionListener {
                             f.setVisible(false);
                             f.dispose();
                         } else {
-                            JOptionPane.showMessageDialog(null, "Incorrect Empid or your password is already set");
+                            JOptionPane.showMessageDialog(null, "Your password is already set");
                         }
                     } catch (Exception e) {
 

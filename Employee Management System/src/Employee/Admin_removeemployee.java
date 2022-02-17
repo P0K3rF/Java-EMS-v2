@@ -370,37 +370,17 @@ public class Admin_removeemployee implements ActionListener{
                 }
                
             }catch(Exception ex){}
-//           try{
-//               lphoto.setVisible(true);
-//                conn c2 = new conn();
-//            String st = "Select profileimage from employee where emp_id='"+ts.getText()+"'";
-//            ResultSet rs = c2.s.executeQuery(st);
-//            if (rs.next()) {
-//                imagedata = rs.getBytes("profileimage");
-//                String imad = rs.getString("profileimage");
-//                if (imad.equals("null")) {
-//                    lphoto.setIcon(leavep1);
-//                } else {
-//                    ImageIcon ime = new ImageIcon(imagedata);
-//                    Image mm = ime.getImage();
-//                    Image img2 = mm.getScaledInstance(300, 300, Image.SCALE_SMOOTH);
-//                    ImageIcon image = new ImageIcon(img2);
-//                    lphoto.setIcon(image);
-//                }
-//            }
-//           }catch(Exception e){
-//               
-//           }
+
        }else if(ae.getSource()==b1){
            try{
                 conn con = new conn();
                 String str = "delete from employee where emp_id = '"+ts.getText()+"'";
                 con.s.executeUpdate(str);
-                JOptionPane.showMessageDialog(null,"deleted successfully");
+                JOptionPane.showMessageDialog(null,"deleted successfully");   
                 new Admin_homepage().f.setVisible(true);
                 f.setVisible(false);
             }catch(Exception ex){
-                JOptionPane.showMessageDialog(null,"Exception occured while delting record "+ex);
+                JOptionPane.showMessageDialog(null,"Exception occured while deleting record "+ex);
             }
        }else if(ae.getSource()==bs && ts.getText().isEmpty()){
                     

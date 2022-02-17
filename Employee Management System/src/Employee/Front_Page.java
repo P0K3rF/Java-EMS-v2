@@ -31,7 +31,7 @@ class Front_Page implements ActionListener{
         f.add(l1);
 
 
-        b = new JButton("ADMIN");
+        b = new JButton("USER");
         b.setOpaque(false);
         b.setContentAreaFilled(false);
         b.setBorderPainted(true);
@@ -43,7 +43,7 @@ class Front_Page implements ActionListener{
         b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         
         
-        b1 = new JButton("USER");
+        b1 = new JButton("ADMIN");
         b1.setOpaque(false);
         b1.setContentAreaFilled(false);
         b1.setBorderPainted(true);
@@ -82,14 +82,14 @@ class Front_Page implements ActionListener{
 
         if(ae.getSource()==b){
             
+            new user().f.setVisible(true);
             
-           new login().f.setVisible(true);    
           f.setVisible(false);
          
         }
         else if (ae.getSource()==b1){
         
-        new user().f.setVisible(true);
+         new login().f.setVisible(true);  
         f.setVisible(false);}
         
     }

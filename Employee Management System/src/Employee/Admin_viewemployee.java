@@ -355,6 +355,12 @@ public class Admin_viewemployee implements ActionListener{
                 aadhar = rs.getString("aadhar");
                 emp_id = rs.getString("emp_id");
                 
+                if(email.length()<18){
+                    temail.setBounds(320,600, 300, 50);
+                }else if(email.length()>18){
+                    temail.setBounds(320,600, 380, 50);
+                }
+                
                  tfname.setVisible(true);
                  tfname.setText(name);
                  tlname.setVisible(true);
