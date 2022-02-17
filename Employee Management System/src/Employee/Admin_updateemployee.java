@@ -27,15 +27,16 @@ import javax.swing.table.DefaultTableModel;
 public class Admin_updateemployee implements ActionListener {
 
     JFrame f;
-    JLabel l1, l2,l3;
+    JLabel l1, l2, l3;
     JLabel id1, id2, id3, id4, id5, id6, id7, id8, id9, id10, id11, id12;
-    JLabel dd1,dd2,dd3,dd4,dd5,dd6,dd7,dd8,dd9,dd10;
+    JLabel dd1, dd2, dd3, dd4, dd5, dd6, dd7, dd8, dd9, dd10;
     JTextField t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13, t14, ts;
-    JButton b1,bs,backb;
+    JButton b1, bs, backb;
     int i = 0;
     DefaultTableModel dtm;
     JTable table;
     JScrollPane jsp;
+
     Admin_updateemployee() {
 
         f = new JFrame("HomePage");
@@ -58,16 +59,16 @@ public class Admin_updateemployee implements ActionListener {
         l2.setLayout(null);
         l1.add(l2);
 
-        l3=new JLabel("UPDATE EMPLOYEE");
+        l3 = new JLabel("UPDATE EMPLOYEE");
         l3.setBounds(200, 40, 450, 60);
-        l3.setFont(new Font("solaris-2",Font.ROMAN_BASELINE,40));
-        l3.setForeground(new Color(0,255,254));
+        l3.setFont(new Font("solaris-2", Font.ROMAN_BASELINE, 40));
+        l3.setForeground(new Color(0, 255, 254));
         Font font1 = l3.getFont();
         Map attributes1 = font1.getAttributes();
         attributes1.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
         l3.setFont(font1.deriveFont(attributes1));
         l2.add(l3);
-        
+
         ts = new RoundJTextField(20);
         ts.setBounds(800, 40, 200, 50);
         ts.setFont(new Font("leelawadee UI 23 Plain", Font.ROMAN_BASELINE, 25));
@@ -97,40 +98,40 @@ public class Admin_updateemployee implements ActionListener {
         });
         bs.addActionListener(this);
         l2.add(bs);
-        
-         String columns[] = {"Emp_Id","Phone","Email","Post"};
-        dtm=new DefaultTableModel(columns,0); 
-        
-        try{
-            conn c=new conn();
-            String query="Select * from employee";
-            ResultSet rs=c.s.executeQuery(query);
-            while(rs.next()){
-                String id=rs.getString("emp_id");
-                String rsphone1=rs.getString("phone");
-                String rsemail1=rs.getString("email");
-                String rspost1=rs.getString("post");
-                dtm.addRow(new Object[]{id,rsphone1,rsemail1,rspost1});
+
+        String columns[] = {"Emp_Id", "Phone", "Email", "Post"};
+        dtm = new DefaultTableModel(columns, 0);
+
+        try {
+            conn c = new conn();
+            String query = "Select * from employee";
+            ResultSet rs = c.s.executeQuery(query);
+            while (rs.next()) {
+                String id = rs.getString("emp_id");
+                String rsphone1 = rs.getString("phone");
+                String rsemail1 = rs.getString("email");
+                String rspost1 = rs.getString("post");
+                dtm.addRow(new Object[]{id, rsphone1, rsemail1, rspost1});
             }
-            
-        }catch(Exception e){
-            
+
+        } catch (Exception e) {
+
         }
-        table =new JTable();
+        table = new JTable();
         table.setModel(dtm);
         table.setEnabled(false);
-        table.setPreferredScrollableViewportSize(new Dimension(500,50));
+        table.setPreferredScrollableViewportSize(new Dimension(500, 50));
         table.setFillsViewportHeight(true);
-        table.getTableHeader().setPreferredSize(new Dimension(100,50));
-        table.getTableHeader().setFont(new Font("solaris-2",Font.BOLD,20));
-        table.getTableHeader().setBackground(new Color(18,140,226));
-        table.getTableHeader().setForeground(new Color(255,255,255));
+        table.getTableHeader().setPreferredSize(new Dimension(100, 50));
+        table.getTableHeader().setFont(new Font("solaris-2", Font.BOLD, 20));
+        table.getTableHeader().setBackground(new Color(18, 140, 226));
+        table.getTableHeader().setForeground(new Color(255, 255, 255));
         table.setRowHeight(50);
-        table.setBackground(new Color(204,255,255));
-        table.setFont(new Font("solrais-2",Font.ROMAN_BASELINE,20));
-        table.setForeground(new Color(0,0,0));
+        table.setBackground(new Color(204, 255, 255));
+        table.setFont(new Font("solrais-2", Font.ROMAN_BASELINE, 20));
+        table.setForeground(new Color(0, 0, 0));
         JTableUtilities.setCellsAlignment(table, SwingConstants.CENTER);
-        jsp=new JScrollPane(table);
+        jsp = new JScrollPane(table);
         jsp.setBounds(150, 160, 1055, 600);
         l2.add(jsp);
 
@@ -141,13 +142,13 @@ public class Admin_updateemployee implements ActionListener {
         id1.setVisible(false);
         l2.add(id1);
 
-        dd1=new JLabel(":");
+        dd1 = new JLabel(":");
         dd1.setVisible(false);
         dd1.setForeground(Color.WHITE);
         dd1.setFont(new Font("leelawadee UI 23 Plain", Font.BOLD, 30));
-        dd1.setBounds(290, 160,20, 50);
+        dd1.setBounds(290, 160, 20, 50);
         l2.add(dd1);
-        
+
         t1 = new JTextField();
         t1.setBounds(330, 160, 300, 50);
         t1.setFont(new Font("leelawadee UI 23 Plain", Font.ROMAN_BASELINE, 25));
@@ -161,12 +162,12 @@ public class Admin_updateemployee implements ActionListener {
         id2.setForeground(Color.WHITE);
         id2.setVisible(false);
         l2.add(id2);
-        
-        dd2=new JLabel(":");
+
+        dd2 = new JLabel(":");
         dd2.setVisible(false);
         dd2.setForeground(Color.WHITE);
         dd2.setFont(new Font("leelawadee UI 23 Plain", Font.BOLD, 30));
-        dd2.setBounds(990, 160,20, 50);
+        dd2.setBounds(990, 160, 20, 50);
         l2.add(dd2);
 
         t2 = new JTextField();
@@ -183,13 +184,13 @@ public class Admin_updateemployee implements ActionListener {
         id3.setVisible(false);
         l2.add(id3);
 
-        dd3=new JLabel(":");
+        dd3 = new JLabel(":");
         dd3.setVisible(false);
         dd3.setForeground(Color.WHITE);
         dd3.setFont(new Font("leelawadee UI 23 Plain", Font.BOLD, 30));
-        dd3.setBounds(290, 280,20, 50);
+        dd3.setBounds(290, 280, 20, 50);
         l2.add(dd3);
-        
+
         t3 = new JTextField();
         t3.setBounds(330, 280, 300, 50);
         t3.setFont(new Font("leelawadee UI 23 Plain", Font.ROMAN_BASELINE, 25));
@@ -204,13 +205,13 @@ public class Admin_updateemployee implements ActionListener {
         id4.setVisible(false);
         l2.add(id4);
 
-        dd4=new JLabel(":");
+        dd4 = new JLabel(":");
         dd4.setVisible(false);
         dd4.setForeground(Color.WHITE);
         dd4.setFont(new Font("leelawadee UI 23 Plain", Font.BOLD, 30));
-        dd4.setBounds(990, 280,20, 50);
+        dd4.setBounds(990, 280, 20, 50);
         l2.add(dd4);
-        
+
         t4 = new JTextField();
         t4.setBounds(1030, 280, 300, 50);
         t4.setFont(new Font("leelawadee UI 23 Plain", Font.ROMAN_BASELINE, 25));
@@ -225,13 +226,13 @@ public class Admin_updateemployee implements ActionListener {
         id5.setVisible(false);
         l2.add(id5);
 
-        dd5=new JLabel(":");
+        dd5 = new JLabel(":");
         dd5.setVisible(false);
         dd5.setForeground(Color.WHITE);
         dd5.setFont(new Font("leelawadee UI 23 Plain", Font.BOLD, 30));
-        dd5.setBounds(290, 400,20, 50);
+        dd5.setBounds(290, 400, 20, 50);
         l2.add(dd5);
-        
+
         t5 = new JTextField();
         t5.setBounds(330, 400, 300, 50);
         t5.setFont(new Font("leelawadee UI 23 Plain", Font.ROMAN_BASELINE, 25));
@@ -246,13 +247,13 @@ public class Admin_updateemployee implements ActionListener {
         id6.setVisible(false);
         l2.add(id6);
 
-        dd6=new JLabel(":");
+        dd6 = new JLabel(":");
         dd6.setVisible(false);
         dd6.setForeground(Color.WHITE);
         dd6.setFont(new Font("leelawadee UI 23 Plain", Font.BOLD, 30));
-        dd6.setBounds(990, 400,20, 50);
+        dd6.setBounds(990, 400, 20, 50);
         l2.add(dd6);
-        
+
         t6 = new JTextField();
         t6.setBounds(1030, 400, 300, 50);
         t6.setFont(new Font("leelawadee UI 23 Plain", Font.ROMAN_BASELINE, 25));
@@ -266,12 +267,12 @@ public class Admin_updateemployee implements ActionListener {
         id7.setForeground(Color.WHITE);
         id7.setVisible(false);
         l2.add(id7);
-        
-        dd7=new JLabel(":");
+
+        dd7 = new JLabel(":");
         dd7.setVisible(false);
         dd7.setForeground(Color.WHITE);
         dd7.setFont(new Font("leelawadee UI 23 Plain", Font.BOLD, 30));
-        dd7.setBounds(290, 520,20, 50);
+        dd7.setBounds(290, 520, 20, 50);
         l2.add(dd7);
 
         t7 = new JTextField();
@@ -288,13 +289,13 @@ public class Admin_updateemployee implements ActionListener {
         id9.setVisible(false);
         l2.add(id9);
 
-        dd8=new JLabel(":");
+        dd8 = new JLabel(":");
         dd8.setVisible(false);
         dd8.setForeground(Color.WHITE);
         dd8.setFont(new Font("leelawadee UI 23 Plain", Font.BOLD, 30));
-        dd8.setBounds(990, 520,20, 50);
+        dd8.setBounds(990, 520, 20, 50);
         l2.add(dd8);
-        
+
         t8 = new JTextField();
         t8.setBounds(1030, 520, 300, 50);
         t8.setFont(new Font("leelawadee UI 23 Plain", Font.ROMAN_BASELINE, 25));
@@ -308,12 +309,12 @@ public class Admin_updateemployee implements ActionListener {
         id10.setForeground(Color.WHITE);
         id10.setVisible(false);
         l2.add(id10);
-        
-        dd9=new JLabel(":");
+
+        dd9 = new JLabel(":");
         dd9.setVisible(false);
         dd9.setForeground(Color.WHITE);
         dd9.setFont(new Font("leelawadee UI 23 Plain", Font.BOLD, 30));
-        dd9.setBounds(290, 640,20, 50);
+        dd9.setBounds(290, 640, 20, 50);
         l2.add(dd9);
 
         t9 = new JTextField();
@@ -329,12 +330,12 @@ public class Admin_updateemployee implements ActionListener {
         id11.setForeground(Color.WHITE);
         id11.setVisible(false);
         l2.add(id11);
-        
-        dd10=new JLabel(":");
+
+        dd10 = new JLabel(":");
         dd10.setVisible(false);
         dd10.setForeground(Color.WHITE);
         dd10.setFont(new Font("leelawadee UI 23 Plain", Font.BOLD, 30));
-        dd10.setBounds(990, 640,20, 50);
+        dd10.setBounds(990, 640, 20, 50);
         l2.add(dd10);
 
         t10 = new JTextField();
@@ -371,9 +372,8 @@ public class Admin_updateemployee implements ActionListener {
         b1.addActionListener(this);
         l2.add(b1);
 
-        
         ImageIcon iback = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/goback.png"));
-        backb=new JButton();
+        backb = new JButton();
         backb.setIcon(iback);
         backb.setBounds(1700, 880, 160, 60);
         backb.setBackground(new Color(0, 0, 57));
@@ -382,13 +382,14 @@ public class Admin_updateemployee implements ActionListener {
         backb.setContentAreaFilled(false);
         backb.setFocusable(false);
         backb.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        backb.addMouseListener(new MouseAdapter(){
+        backb.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseEntered(MouseEvent e){
+            public void mouseEntered(MouseEvent e) {
                 ImageIcon iback1 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/goback1.png"));
                 backb.setIcon(iback1);
             }
-             @Override
+
+            @Override
             public void mouseExited(MouseEvent e) {
                 backb.setIcon(iback);
             }
@@ -396,9 +397,9 @@ public class Admin_updateemployee implements ActionListener {
         backb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-               new Admin_homepage().f.setVisible(true);
-               f.setVisible(false);
-               f.dispose();
+                new Admin_homepage().f.setVisible(true);
+                f.setVisible(false);
+                f.dispose();
             }
         });
         l1.add(backb);
@@ -434,7 +435,7 @@ public class Admin_updateemployee implements ActionListener {
                     id9.setVisible(true);
                     id10.setVisible(true);
                     id11.setVisible(true);
-                    
+
                     dd1.setVisible(true);
                     dd2.setVisible(true);
                     dd3.setVisible(true);
@@ -445,7 +446,7 @@ public class Admin_updateemployee implements ActionListener {
                     dd8.setVisible(true);
                     dd9.setVisible(true);
                     dd10.setVisible(true);
-                    
+
                     t1.setVisible(true);
                     t2.setVisible(true);
                     t3.setVisible(true);
@@ -458,7 +459,6 @@ public class Admin_updateemployee implements ActionListener {
                     t10.setVisible(true);
 
                     b1.setVisible(true);
-                    
 
                     i = 1;
                     t1.setText(rs.getString(1));
@@ -475,7 +475,7 @@ public class Admin_updateemployee implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(null, "Id not found");
                     jsp.setVisible(true);
-            
+
                     id1.setVisible(false);
                     id2.setVisible(false);
                     id3.setVisible(false);
@@ -486,7 +486,7 @@ public class Admin_updateemployee implements ActionListener {
                     id9.setVisible(false);
                     id10.setVisible(false);
                     id11.setVisible(false);
-                    
+
                     dd1.setVisible(false);
                     dd2.setVisible(false);
                     dd3.setVisible(false);
@@ -497,7 +497,7 @@ public class Admin_updateemployee implements ActionListener {
                     dd8.setVisible(false);
                     dd9.setVisible(false);
                     dd10.setVisible(false);
-                    
+
                     t1.setVisible(false);
                     t2.setVisible(false);
                     t3.setVisible(false);
@@ -515,54 +515,59 @@ public class Admin_updateemployee implements ActionListener {
             }
         } else if (ae.getSource() == b1 && i == 1) {
             try {
-                conn con = new conn();
-                String str = "update employee set name='" + t1.getText() + "',fname='" + t2.getText() + "',age='" + t3.getText() + "',dob='" + t4.getText() + "',address='" + t5.getText() + "',phone='" + t6.getText() + "',email='" + t7.getText() + "',education='" + t8.getText() + "',post='" + t9.getText() + "',aadhar='" + t10.getText() + "' where emp_id='" + ts.getText() + "'";
-                con.s.executeUpdate(str);
-                JOptionPane.showMessageDialog(null, "successfully updated");
-                new Admin_homepage().f.setVisible(true);
-                f.setVisible(false);
+                if (t1.getText().isEmpty() || t2.getText().isEmpty() || t3.getText().isEmpty() || t4.getText().isEmpty() || t5.getText().isEmpty() || t6.getText().isEmpty() || t7.getText().isEmpty() || t8.getText().isEmpty() || t9.getText().isEmpty() || t10.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No Field Should be Empty");
+                } else {
+                    conn con = new conn();
+                    String str = "update employee set name='" + t1.getText() + "',fname='" + t2.getText() + "',age='" + t3.getText() + "',dob='" + t4.getText() + "',address='" + t5.getText() + "',phone='" + t6.getText() + "',email='" + t7.getText() + "',education='" + t8.getText() + "',post='" + t9.getText() + "',aadhar='" + t10.getText() + "' where emp_id='" + ts.getText() + "'";
+                    con.s.executeUpdate(str);
+                    JOptionPane.showMessageDialog(null, "successfully updated");
+                    new Admin_homepage().f.setVisible(true);
+                    f.setVisible(false);
+                    f.dispose();
+                }
             } catch (Exception e) {
                 System.out.println("The error is:" + e);
             }
 
-        }else if(ae.getSource() == bs && ts.getText().isEmpty()){
+        } else if (ae.getSource() == bs && ts.getText().isEmpty()) {
             jsp.setVisible(true);
-            
-                    id1.setVisible(false);
-                    id2.setVisible(false);
-                    id3.setVisible(false);
-                    id4.setVisible(false);
-                    id5.setVisible(false);
-                    id6.setVisible(false);
-                    id7.setVisible(false);
-                    id9.setVisible(false);
-                    id10.setVisible(false);
-                    id11.setVisible(false);
-                    
-                    dd1.setVisible(false);
-                    dd2.setVisible(false);
-                    dd3.setVisible(false);
-                    dd4.setVisible(false);
-                    dd5.setVisible(false);
-                    dd6.setVisible(false);
-                    dd7.setVisible(false);
-                    dd8.setVisible(false);
-                    dd9.setVisible(false);
-                    dd10.setVisible(false);
-                    
-                    t1.setVisible(false);
-                    t2.setVisible(false);
-                    t3.setVisible(false);
-                    t4.setVisible(false);
-                    t5.setVisible(false);
-                    t6.setVisible(false);
-                    t7.setVisible(false);
-                    t8.setVisible(false);
-                    t9.setVisible(false);
-                    t10.setVisible(false);
 
-                    b1.setVisible(false);
-            
+            id1.setVisible(false);
+            id2.setVisible(false);
+            id3.setVisible(false);
+            id4.setVisible(false);
+            id5.setVisible(false);
+            id6.setVisible(false);
+            id7.setVisible(false);
+            id9.setVisible(false);
+            id10.setVisible(false);
+            id11.setVisible(false);
+
+            dd1.setVisible(false);
+            dd2.setVisible(false);
+            dd3.setVisible(false);
+            dd4.setVisible(false);
+            dd5.setVisible(false);
+            dd6.setVisible(false);
+            dd7.setVisible(false);
+            dd8.setVisible(false);
+            dd9.setVisible(false);
+            dd10.setVisible(false);
+
+            t1.setVisible(false);
+            t2.setVisible(false);
+            t3.setVisible(false);
+            t4.setVisible(false);
+            t5.setVisible(false);
+            t6.setVisible(false);
+            t7.setVisible(false);
+            t8.setVisible(false);
+            t9.setVisible(false);
+            t10.setVisible(false);
+
+            b1.setVisible(false);
+
         }
 
     }

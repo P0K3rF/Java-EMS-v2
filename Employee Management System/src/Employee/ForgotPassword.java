@@ -10,6 +10,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.TextAttribute;
+import java.sql.ResultSet;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
@@ -85,9 +86,15 @@ public class ForgotPassword implements ActionListener {
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-             
-                
-                try{
+              try{
+                    
+                    conn c= new conn();
+                    String q="Select * from employee where email='"+t1.getText()+"'";
+                    ResultSet rs=c.s.executeQuery(q);
+                    if(!rs.next()){
+                        JOptionPane.showMessageDialog(null,"Invalid Email");
+                    }else{
+                         try{
                     Random randno=new Random();
              randomnumber=randno.nextInt(999999);
              String host="smtp.gmail.com";
@@ -120,8 +127,15 @@ public class ForgotPassword implements ActionListener {
                     transport.close();
                     JOptionPane.showMessageDialog(null,"Code has been sent");
                 }catch(Exception e){
-                    JOptionPane.showMessageDialog(null,e);
+                    JOptionPane.showMessageDialog(null,"Invalid Email");
                 }
+                    }
+                    
+                }catch(Exception e){
+                    
+                }
+                
+               
                 
             }
         });
@@ -146,6 +160,7 @@ public class ForgotPassword implements ActionListener {
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+
               if(Integer.valueOf(t2.getText())==randomnumber){
                   new ResetPassword(t1.getText()).f.setVisible(true);
                   f.setVisible(false);

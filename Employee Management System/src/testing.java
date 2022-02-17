@@ -1,3 +1,9 @@
+
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.*;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -8,76 +14,68 @@
  *
  * @author ktaus
  */
-import Employee.conn;
-import java.sql.*;
-import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import javax.swing.*;
 
 public class testing {
-    String checkout;
-    String checkin;
+    
     JFrame f;
-    JLabel l1;
-    JTextField t1;
-    JButton b2;
-    String s;
-    String[] arr=null;
-    String[] sarr=null;
-    String[] earr=null;
-    int v=30;
+    JTextField t1,t2;
+    JLabel l1,l2;
+    JButton b1;
+     calltesting cl;
+    
     testing(){
-        f=new JFrame("Testing");
-        f.setBackground(Color.red);
+        f=new JFrame();
+        f.setBounds(500, 500, 500,500);
         f.setLayout(null);
+        f.setLocationRelativeTo(null);
         
-        JPanel panel = new JPanel();
-            panel.setLayout(null);
-            panel.setBounds(0, 0, 800, 500);
-            try{
-                conn c1=new conn();
-               String query="Select * from salary where emp_id='101' and status='unseen'";
-                 ResultSet rs1=c1.s.executeQuery(query);
-                 while(rs1.next()){
-                     String sal=rs1.getString("salary");
-                      arr=sal.split("\n");
-                      String sdate=rs1.getString("checkin_date");
-                     String edate=rs1.getString("checkout_date");
-                     sarr=sdate.split("\n");
-                      earr=edate.split("\n");
-                     
-            JLabel[] labels = new JLabel[arr.length];
-            for (int i = 0; i < arr.length; i++){
-                labels[i] = new JLabel();
-                labels[i].setBounds(50,v,80,20);
-                labels[i].setText("Your Salary from "+ sarr[i]+" to "+earr[i]+ " is "+arr[i]);
-                panel.add(labels[i]);
-                v=v+40;
-            }
-                 }
-                
-            }catch(Exception e){
-                
-            }
-            
-            f.add(panel);
-       
         
-         f.getContentPane().setBackground(Color.WHITE);
+        t1=new JTextField();
+        t1.setBounds(50, 50, 300, 50);
+        f.add(t1);
+        
+        t2=new JTextField();
+        t2.setBounds(50, 150, 300, 50);
+        f.add(t2);
+        
+        l1=new JLabel();
+        l1.setBounds(80, 250, 300, 50);
+        l1.setFont(new Font("sans-serif",Font.BOLD,30));
+        f.add(l1);
+        
+        l2=new JLabel();
+        l2.setBounds(250, 250, 300, 50);
+        l2.setFont(new Font("sans-serif",Font.BOLD,30));
+        f.add(l2);
+        
+        b1=new JButton("click");
+        b1.setBounds(80,350, 100, 50);
+        b1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+              cl=new calltesting(t1.getText(),t2.getText());
+              String s=cl.getName();
+              String d=cl.getPass();
+              l1.setText(s);
+              l2.setText(d);
+            }
+        });
+        f.add(b1);        
         f.setVisible(true);
-        f.setSize(800,500);
-        f.setLocation(400,300);
-        
-         
     }
     
     public static void main(String[] args){
-        testing test=new testing();
+        testing t=new testing();
+//        
+//        String name="khalil";
+//        String pass="khalil95944";
+//        
+//        calltesting cl=new calltesting(name,pass);
+//        String s=cl.getName();
+//        String d=cl.getPass();
+//        System.out.println("your name is "+ s + " Your password is "+ d);
+        
+                
         
     }
     
