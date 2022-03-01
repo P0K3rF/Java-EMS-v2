@@ -9,92 +9,87 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-class Front_Page implements ActionListener{
-    JFrame f; 
-    JLabel id,l1;
-    JButton b,b1,b2;
+class Front_Page implements ActionListener {
 
-    Front_Page(){
-        
-        f=new JFrame("Employee Management System");
+    JFrame f;
+    JLabel id, l1;
+    JButton b, b1, b2;
+
+    Front_Page() {
+
+        f = new JFrame("Employee Management System");
         f.setBackground(Color.red);
         f.setLayout(null);
         f.setVisible(true);
-       
-        
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/frontpage.jpg"));
-        Image i2 = i1.getImage().getScaledInstance(1920,1080,Image.SCALE_DEFAULT);
-        ImageIcon i3 =  new ImageIcon(i2);
-        JLabel l1 = new JLabel(i3);
-        
-        l1.setBounds(0,0,1920,1080);
-        f.add(l1);
 
+        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/frontpage.jpg"));
+        Image i2 = i1.getImage().getScaledInstance(1920, 1080, Image.SCALE_DEFAULT);
+        ImageIcon i3 = new ImageIcon(i2);
+        JLabel l1 = new JLabel(i3);
+
+        l1.setBounds(0, 0, 1920, 1080);
+        f.add(l1);
 
         b = new JButton("USER");
         b.setOpaque(false);
         b.setContentAreaFilled(false);
         b.setBorderPainted(true);
         b.setForeground(Color.WHITE);
-        b.setBounds(1500,500,150,50);
-        b.setFont(new Font("solaris-2",Font.BOLD,20));
-         b.setFocusable(false);
+        b.setBounds(1500, 500, 150, 50);
+        b.setFont(new Font("solaris-2", Font.BOLD, 20));
+        b.setFocusable(false);
         b.addActionListener(this);
         b.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        
-        
+
         b1 = new JButton("ADMIN");
         b1.setOpaque(false);
         b1.setContentAreaFilled(false);
         b1.setBorderPainted(true);
         b1.setForeground(Color.WHITE);
-        b1.setBounds(1500,400,150,50);
-        b1.setFont(new Font("solaris-2",Font.BOLD,20));
+        b1.setBounds(1500, 400, 150, 50);
+        b1.setFont(new Font("solaris-2", Font.BOLD, 20));
         b1.setFocusable(false);
         b1.addActionListener(this);
         b1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-        
-        id=new JLabel();
-        id.setBounds(35,20,1360,750);
-        
-        JLabel lid=new JLabel("EMPLOYEE MANAGEMENT SYSTEM");
-        lid.setBounds(1280,250,800,50);
-        
-        lid.setFont(new Font("solaris-2", Font.BOLD,35));
+        id = new JLabel();
+        id.setBounds(35, 20, 1360, 750);
+
+        JLabel lid = new JLabel("EMPLOYEE MANAGEMENT SYSTEM");
+        lid.setBounds(1280, 250, 800, 50);
+
+        lid.setFont(new Font("solaris-2", Font.BOLD, 35));
         lid.setForeground(Color.WHITE);
         l1.add(lid);
         l1.add(b);
         l1.add(b1);
 
-               
         f.getContentPane().setBackground(Color.WHITE);
-      
+
 //        f.setExtendedState(f.MAXIMIZED_BOTH);
         f.setSize(1920, 1080);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        f.setLocation(dim.width/2-f.getSize().width/2, dim.height/2-f.getSize().height/2);
-        
-           
-    }
-    
-    public void actionPerformed(ActionEvent ae){
+        f.setLocation(dim.width / 2 - f.getSize().width / 2, dim.height / 2 - f.getSize().height / 2);
 
-        if(ae.getSource()==b){
-            
+    }
+
+    public void actionPerformed(ActionEvent ae) {
+
+        if (ae.getSource() == b) {
+
             new user().f.setVisible(true);
-            
-          f.setVisible(false);
-         
+
+            f.setVisible(false);
+
+        } else if (ae.getSource() == b1) {
+
+            new login().f.setVisible(true);
+            f.setVisible(false);
         }
-        else if (ae.getSource()==b1){
-        
-         new login().f.setVisible(true);  
-        f.setVisible(false);}
-        
+
     }
 
-    public static void main(String[] arg){
+    public static void main(String[] arg) {
         Front_Page f = new Front_Page();
     }
 }

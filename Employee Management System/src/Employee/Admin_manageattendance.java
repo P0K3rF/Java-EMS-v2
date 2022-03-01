@@ -613,7 +613,7 @@ public class Admin_manageattendance implements ActionListener {
                         ResultSet res = c1.s.executeQuery(p);
                         if (res.next()) {
 //                            String query = "select '" + tsalpd.getText() + "'-'" + tdeduc.getText() + "'*(count(emp_id)) as salary from attendance where emp_id='" + t1.getText() + "' and checkout_date between '" + s + "' and '" + e + "'";
-                            String query = "select '" + tsalpd.getText() + "'*(count(emp_id))-'"+tdeduc.getText()+"' as salary from attendance where emp_id='" + t1.getText() + "' and checkout_date between '" + s + "' and '" + e + "'";
+                            String query = "select '" + tsalpd.getText() + "'*(count(emp_id))-'" + tdeduc.getText() + "' as salary from attendance where emp_id='" + t1.getText() + "' and checkout_date between '" + s + "' and '" + e + "'";
                             ResultSet rs = c1.s.executeQuery(query);
                             if (rs.next()) {
                                 sal = rs.getString("salary");

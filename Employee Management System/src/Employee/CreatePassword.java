@@ -23,18 +23,18 @@ import javax.swing.border.LineBorder;
 public class CreatePassword implements ActionListener {
 
     JFrame f;
-    JLabel l1, l2, l3, l4,l5;
+    JLabel l1, l2, l3, l4, l5;
     JLabel crnp;
     JButton b1, b2;
     JTextField t1;
     JPasswordField t2, t3;
-    JButton b4,b6;
+    JButton b4, b6;
     String dbempid, password;
 
     CreatePassword() {
         f = new JFrame("Create Password");
         f.setLayout(null);
- 
+
         ImageIcon i11 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/forgetbg.jpg"));
         Image img12 = i11.getImage().getScaledInstance(1945, 1080, Image.SCALE_DEFAULT);
         ImageIcon i10 = new ImageIcon(img12);
@@ -42,16 +42,16 @@ public class CreatePassword implements ActionListener {
         l5.setBounds(0, 0, 1945, 1080);
         l5.setLayout(null);
         f.add(l5);
-        
+
         ImageIcon i12 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/createpassword.png"));
         Image i5 = i12.getImage().getScaledInstance(670, 600, Image.SCALE_DEFAULT);
         ImageIcon i4 = new ImageIcon(i5);
         l1 = new JLabel(i4);
-        l1.setBounds(600,200, 670, 600);
+        l1.setBounds(600, 200, 670, 600);
         l5.add(l1);
-        
-        crnp=new JLabel("Create New Password");
-        crnp.setBounds(180,5,500, 60);
+
+        crnp = new JLabel("Create New Password");
+        crnp.setBounds(180, 5, 500, 60);
         crnp.setFont(new Font("sans serif", Font.BOLD, 30));
         Font font1 = crnp.getFont();
         Map attributes1 = font1.getAttributes();
@@ -132,9 +132,8 @@ public class CreatePassword implements ActionListener {
         t3.setFont(new Font("sans serif", Font.ROMAN_BASELINE, 30));
         t3.setForeground(Color.black);
         t3.setBorder(new LineBorder(Color.BLACK, 3, true));
-        
-        
-         ImageIcon i15 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/showpassword.png"));
+
+        ImageIcon i15 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/showpassword.png"));
         Image i3 = i15.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
         ImageIcon il6 = new ImageIcon(i3);
         JButton b5 = new JButton(il6);
@@ -147,7 +146,7 @@ public class CreatePassword implements ActionListener {
         b5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-               b5.setVisible(false);
+                b5.setVisible(false);
                 t3.setEchoChar((char) 0);
 
                 ImageIcon i17 = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/hidepassword.png"));
@@ -172,8 +171,6 @@ public class CreatePassword implements ActionListener {
                 l1.add(b6);
             }
         });
-        
-        
 
         b1 = new JButton("Set Password");
         b1.setBounds(110, 430, 200, 50);
@@ -201,8 +198,7 @@ public class CreatePassword implements ActionListener {
         l1.add(b2);
         l1.add(b3);
         l1.add(b5);
-      
-        
+
         f.setSize(1920 + 25, 1080);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         f.setLocation(dim.width / 2 - f.getSize().width / 2, dim.height / 2 - f.getSize().height / 2);
@@ -216,20 +212,18 @@ public class CreatePassword implements ActionListener {
             if (t1.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Emp id Texfield cannot be empty!");
             }
-            try{
-                conn c=new conn();
-                String q="Select * from employee where emp_id='"+t1.getText()+"'";
-                ResultSet rs1=c.s.executeQuery(q);
-                if(!rs1.next() && !t1.getText().isEmpty()){
+            try {
+                conn c = new conn();
+                String q = "Select * from employee where emp_id='" + t1.getText() + "'";
+                ResultSet rs1 = c.s.executeQuery(q);
+                if (!rs1.next() && !t1.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Incorrect Empid");
                 }
-                
-                
-            }catch(Exception e){
-                
+
+            } catch (Exception e) {
+
             }
-            
-            
+
             if (!t2.getText().isEmpty() && !t3.getText().isEmpty()) {
                 if (t2.getText().equals(t3.getText())) {
 

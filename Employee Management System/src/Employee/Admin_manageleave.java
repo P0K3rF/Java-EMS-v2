@@ -38,16 +38,16 @@ public class Admin_manageleave implements ActionListener {
     JLabel l1, l2, l3;
     JLabel lid, lcat, lsubj, ldesc;
     JTextField t1, t2;
-    JButton backb,appb,denyb;
+    JButton backb, appb, denyb;
     DefaultTableModel dtm;
     JTable table;
-    JScrollPane jsp, jsp1,jsp2;
+    JScrollPane jsp, jsp1, jsp2;
     JTextArea tsubj, tdesc;
     String Data2, Data3;
-    String subj,desc,email;
+    String subj, desc, email;
 
     Admin_manageleave() {
-        f = new JFrame("HomePage");
+        f = new JFrame("Manage Leave");
         f.setBackground(Color.BLUE);
         f.setLayout(null);
 
@@ -147,19 +147,18 @@ public class Admin_manageleave implements ActionListener {
         tdesc.setForeground(Color.BLACK);
         tdesc.setFont(new Font("solaris-2", Font.ROMAN_BASELINE, 20));
         tdesc.setBorder(new LineBorder(Color.WHITE, 3, true));
-       
+
         jsp2 = new JScrollPane(tdesc, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jsp2.setBounds(1100, 510, 450, 200);
-      
+
         l2.add(jsp2);
-        
-        
+
         ImageIcon iappr = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/approve.png"));
         appb = new JButton();
         appb.setIcon(iappr);
         appb.setVisible(false);
         appb.setBounds(1150, 772, 155, 50);
-        appb.setBackground(new Color(0, 0, 57));    
+        appb.setBackground(new Color(0, 0, 57));
         appb.setFocusPainted(false);
         appb.setBorder(null);
         appb.setContentAreaFilled(false);
@@ -180,67 +179,63 @@ public class Admin_manageleave implements ActionListener {
         appb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                try{
-                    conn c4=new conn();
-                    String q="Select * from eleave where emp_id='"+t1.getText()+"' and sdate='"+Data2+"' and edate='"+Data3+"' and status='pending'";
-                    ResultSet rs2=c4.s.executeQuery(q);
-                    if(rs2.next()){
-                        String q1="Update eleave set status='approved',status1='unseen' where emp_id='"+t1.getText()+"' and sdate='"+Data2+"' and edate='"+Data3+"' and status='pending'";
+                try {
+                    conn c4 = new conn();
+                    String q = "Select * from eleave where emp_id='" + t1.getText() + "' and sdate='" + Data2 + "' and edate='" + Data3 + "' and status='pending'";
+                    ResultSet rs2 = c4.s.executeQuery(q);
+                    if (rs2.next()) {
+                        String q1 = "Update eleave set status='approved',status1='unseen' where emp_id='" + t1.getText() + "' and sdate='" + Data2 + "' and edate='" + Data3 + "' and status='pending'";
                         c4.s.executeUpdate(q1);
-                        
-                         
-                         try{
-                    
-             String host="smtp.gmail.com";
-             String user="employeemanagementsystem12@gmail.com";
-             String pass="khalil95944";
-             String touser=email;
-             String subject="Leave Application";
-             String message="Emp ID= "+t1.getText()+" Your Leave Application from  "+Data2+ "  To " + Data3+ "  Has been Approved";
-             boolean sessionDebug=false;
-             Properties pros=System.getProperties();
-             pros.put("mail.smtp.starttls.enable","true");
-             pros.put("mail.smtp.host","host"); 
-             pros.put("mail.smtp.port", "587");
-             pros.put("mail.smtp.auth","true");
-             pros.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-             pros.put("mail.smtp.starttls.required","true");
-             java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-             Session mailSession=Session.getDefaultInstance(pros,null);
-             mailSession.setDebug(sessionDebug);
-             Message msg=new MimeMessage(mailSession);
-               
-                    msg.setFrom(new InternetAddress(user));
-                    InternetAddress[] address ={new InternetAddress(touser)};
-                    msg.setRecipients(Message.RecipientType.TO, address);
-                    msg.setSubject(subject);
-                    msg.setText(message);
-                    Transport transport=mailSession.getTransport("smtp");
-                    transport.connect(host,user,pass);
-                    transport.sendMessage(msg, msg.getAllRecipients());
-                    transport.close();
-                     JOptionPane.showMessageDialog(null, "Approved");
-                     new Admin_manageleave().f.setVisible(true);
-                     f.setVisible(false);
-                     f.dispose();
-                }catch(Exception e){
-                    JOptionPane.showMessageDialog(null,e);
-                }
-                         
-     
-                    }else{
+
+                        try {
+
+                            String host = "smtp.gmail.com";
+                            String user = "employeemanagementsystem12@gmail.com";
+                            String pass = "khalil95944";
+                            String touser = email;
+                            String subject = "Leave Application";
+                            String message = "Emp ID= " + t1.getText() + " Your Leave Application from  " + Data2 + "  To " + Data3 + "  Has been Approved";
+                            boolean sessionDebug = false;
+                            Properties pros = System.getProperties();
+                            pros.put("mail.smtp.starttls.enable", "true");
+                            pros.put("mail.smtp.host", "host");
+                            pros.put("mail.smtp.port", "587");
+                            pros.put("mail.smtp.auth", "true");
+                            pros.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+                            pros.put("mail.smtp.starttls.required", "true");
+                            java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+                            Session mailSession = Session.getDefaultInstance(pros, null);
+                            mailSession.setDebug(sessionDebug);
+                            Message msg = new MimeMessage(mailSession);
+
+                            msg.setFrom(new InternetAddress(user));
+                            InternetAddress[] address = {new InternetAddress(touser)};
+                            msg.setRecipients(Message.RecipientType.TO, address);
+                            msg.setSubject(subject);
+                            msg.setText(message);
+                            Transport transport = mailSession.getTransport("smtp");
+                            transport.connect(host, user, pass);
+                            transport.sendMessage(msg, msg.getAllRecipients());
+                            transport.close();
+                            JOptionPane.showMessageDialog(null, "Approved");
+                            new Admin_manageleave().f.setVisible(true);
+                            f.setVisible(false);
+                            f.dispose();
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, e);
+                        }
+
+                    } else {
                         JOptionPane.showMessageDialog(null, "Already Approved or Denied");
                     }
-                    
-                    
-                }catch(Exception e){
-                    
+
+                } catch (Exception e) {
+
                 }
             }
         });
         l2.add(appb);
-        
-        
+
         ImageIcon ideny = new ImageIcon(ClassLoader.getSystemResource("Employee/icons/deny.png"));
         denyb = new JButton();
         denyb.setIcon(ideny);
@@ -267,68 +262,71 @@ public class Admin_manageleave implements ActionListener {
         denyb.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                try{
-                    conn c4=new conn();
-                    String q="Select * from eleave where emp_id='"+t1.getText()+"' and sdate='"+Data2+"' and edate='"+Data3+"' and status='pending'";
-                    ResultSet rs2=c4.s.executeQuery(q);
-                    if(rs2.next()){
-                        String q1="Update eleave set status='denied' , status1='unseen' where emp_id='"+t1.getText()+"' and sdate='"+Data2+"' and edate='"+Data3+"' and status='pending'";
+                try {
+                    conn c4 = new conn();
+                    String q = "Select * from eleave where emp_id='" + t1.getText() + "' and sdate='" + Data2 + "' and edate='" + Data3 + "' and status='pending'";
+                    ResultSet rs2 = c4.s.executeQuery(q);
+                    if (rs2.next()) {
+                        String q1 = "Update eleave set status='denied' , status1='unseen' where emp_id='" + t1.getText() + "' and sdate='" + Data2 + "' and edate='" + Data3 + "' and status='pending'";
                         c4.s.executeUpdate(q1);
-                        
-                         
-                         try{
-                    
-             String host="smtp.gmail.com";
-             String user="employeemanagementsystem12@gmail.com";
-             String pass="khalil95944";
-             String touser=email;
-             String subject="Leave Application";
-             String message="Emp ID= "+t1.getText()+" Your Leave Application from  "+Data2+ "  To  " + Data3+ "  Has been Denied";
-             boolean sessionDebug=false;
-             Properties pros=System.getProperties();
-             pros.put("mail.smtp.starttls.enable","true");
-             pros.put("mail.smtp.host","host"); 
-             pros.put("mail.smtp.port", "587");
-             pros.put("mail.smtp.auth","true");
-             pros.put("mail.smtp.ssl.trust", "smtp.gmail.com");
-             pros.put("mail.smtp.starttls.required","true");
-             java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
-             Session mailSession=Session.getDefaultInstance(pros,null);
-             mailSession.setDebug(sessionDebug);
-             Message msg=new MimeMessage(mailSession);
-               
-                    msg.setFrom(new InternetAddress(user));
-                    InternetAddress[] address ={new InternetAddress(touser)};
-                    msg.setRecipients(Message.RecipientType.TO, address);
-                    msg.setSubject(subject);
-                    msg.setText(message);
-                    Transport transport=mailSession.getTransport("smtp");
-                    transport.connect(host,user,pass);
-                    transport.sendMessage(msg, msg.getAllRecipients());
-                    transport.close();
-                     JOptionPane.showMessageDialog(null, "Denied");
-                     new Admin_manageleave().f.setVisible(true);
-                     f.setVisible(false);
-                     f.dispose();
-                }catch(Exception e){
-                    JOptionPane.showMessageDialog(null,e);
-                }
-                         
-     
-                    }else{
+
+                        try {
+
+                            String host = "smtp.gmail.com";
+                            String user = "employeemanagementsystem12@gmail.com";
+                            String pass = "khalil95944";
+                            String touser = email;
+                            String subject = "Leave Application";
+                            String message = "Emp ID= " + t1.getText() + " Your Leave Application from  " + Data2 + "  To  " + Data3 + "  Has been Denied";
+                            boolean sessionDebug = false;
+                            Properties pros = System.getProperties();
+                            pros.put("mail.smtp.starttls.enable", "true");
+                            pros.put("mail.smtp.host", "host");
+                            pros.put("mail.smtp.port", "587");
+                            pros.put("mail.smtp.auth", "true");
+                            pros.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+                            pros.put("mail.smtp.starttls.required", "true");
+                            java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+                            Session mailSession = Session.getDefaultInstance(pros, null);
+                            mailSession.setDebug(sessionDebug);
+                            Message msg = new MimeMessage(mailSession);
+
+                            msg.setFrom(new InternetAddress(user));
+                            InternetAddress[] address = {new InternetAddress(touser)};
+                            msg.setRecipients(Message.RecipientType.TO, address);
+                            msg.setSubject(subject);
+                            msg.setText(message);
+                            Transport transport = mailSession.getTransport("smtp");
+                            transport.connect(host, user, pass);
+                            transport.sendMessage(msg, msg.getAllRecipients());
+                            transport.close();
+                            JOptionPane.showMessageDialog(null, "Denied");
+                            new Admin_manageleave().f.setVisible(true);
+                            f.setVisible(false);
+                            f.dispose();
+                        } catch (Exception e) {
+                            JOptionPane.showMessageDialog(null, e);
+                        }
+
+                    } else {
                         JOptionPane.showMessageDialog(null, "Already Approved or Denied");
                     }
-                    
-                    
-                }catch(Exception e){
-                    
+
+                } catch (Exception e) {
+
                 }
             }
         });
         l2.add(denyb);
 
         String columns[] = {"Emp_Id", "From", "To", "Category", "Status"};
-        dtm = new DefaultTableModel(columns, 0);
+        dtm = new DefaultTableModel(columns, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                //Cell Editable false
+                return false;
+            }
+        };
         try {
             conn c = new conn();
             String query = "SELECT * FROM eleave";
@@ -364,7 +362,6 @@ public class Admin_manageleave implements ActionListener {
         jsp.setBounds(50, 150, 795, 600);
         l2.add(jsp);
 
-        
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(final MouseEvent e) {
@@ -373,7 +370,6 @@ public class Admin_manageleave implements ActionListener {
                     final int row = target.getSelectedRow();
                     int column = 0;
                     final String Data = (String) target.getValueAt(row, column);
-
                     t1.setText(Data);
 
                     int column1 = 3;
@@ -405,13 +401,13 @@ public class Admin_manageleave implements ActionListener {
                         while (rs1.next()) {
                             subj = rs1.getString("subject");
                             desc = rs1.getString("description");
-                            email=rs1.getString("email");
+                            email = rs1.getString("email");
 
                         }
                     } catch (Exception ae) {
 
                     }
-                   
+
                     appb.setVisible(true);
                     denyb.setVisible(true);
                     tsubj.setText(subj);
