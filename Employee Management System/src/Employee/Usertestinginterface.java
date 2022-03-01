@@ -42,7 +42,7 @@ public class Usertestinginterface {
             lupdate, lok, ltime, lswingtime, lday, lswingday, ldate, lswingdate, lopcheckin, lmarkatt, lprofile, lattprofile, leaveemp, leaveemail, leavesdate, leaveedate, leavesubject, leavedesc, leavecatg, othercatg, leaveprofile, lmsg, lmsg1, lmsg2;
     JPanel mainpanel, p1, p2, p3, p4, p5, p6, attendancelabel, upperpanel, attchildlabel, leavepanel, leavechildpanel, notpanel, notchildpanel;
     String emp_id, name, father, address, phone, email, education, post, age, dob, aadhar;
-    JButton b1, b2, b3, b4, updateb, saveb, cancelb, checkinb, checkoutb, addprofileb, saveprofileb, applyleave, seenb, not, not1, not2, notrefb, logout;
+    JButton b1, b2, b3, b4, updateb, saveb, cancelb, checkinb, checkoutb, addprofileb, saveprofileb, applyleave, seenb, not, not1, not2, notrefb, notrefb1, logout;
     JTextField tname, tfname, temail, tdob, tphoneno, tcatg;
     JTextField t1emp, t1email;
     String Stname, Stfname, Stemail, Stdob, Stphoneno;
@@ -74,6 +74,7 @@ public class Usertestinginterface {
     String[] sdatearr = null;
     String[] edatearr = null;
     String[] arrstatus = null;
+    String status, status1;
 
     Usertestinginterface(String e_id) {
 
@@ -624,7 +625,7 @@ public class Usertestinginterface {
 
                 //Declaring date and time to insert in database 
                 LocalDate myDateObj = LocalDate.now();
-                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 DDate = myDateObj.format(myFormatObj);
 
                 LocalTime myTimelabel = LocalTime.now();
@@ -840,11 +841,11 @@ public class Usertestinginterface {
                 try {
 
                     conn cc = new conn();
-                    String q = "insert into attendance values('" + emp_id + "','" + Time + "','" + Date + "','null','null','null')";
+                    String q = "insert into attendance values('" + emp_id + "','" + Time + "',STR_TO_DATE('" + Date + "','%d-%b-%Y'),'null',NULL,'null')";
                     cc.s.executeUpdate(q);
                     lopcheckin.setText("You are logged in at " + Timelabel);
                 } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, "In checkin first catch block");
+                    JOptionPane.showMessageDialog(null, e);
                 }
             }
         });
@@ -883,6 +884,9 @@ public class Usertestinginterface {
                 LocalDate myDateObj = LocalDate.now();
                 DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
                 String Date = myDateObj.format(myFormatObj);
+                LocalDate myDateObj1 = LocalDate.now();
+                DateTimeFormatter myFormatObj1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String Date1 = myDateObj1.format(myFormatObj1);
                 LocalTime myTimeObj = LocalTime.now();
                 DateTimeFormatter myTimeFormatObj = DateTimeFormatter.ofPattern("HH:mm:ss");
                 String Time = myTimeObj.format(myTimeFormatObj);
@@ -899,11 +903,12 @@ public class Usertestinginterface {
                         outdate = rs.getString("checkout_date");
 
                     }
-                    if (sempid.equals(emp_id) && Date.equals(indate)) {
+                    if (sempid.equals(emp_id) && Date1.equals(indate)) {
                         if (sempid.equals(emp_id) && outtime.equals("null")) {
                             conn cc = new conn();
-                            String q = "update attendance SET checkout_time='" + Time + "',checkout_date='" + Date + "'where emp_id='" + emp_id + "' AND checkout_time='null' AND checkin_date='" + Date + "'";
+                            String q = "update attendance SET checkout_time='" + Time + "',checkout_date=STR_TO_DATE('" + Date + "','%d-%b-%Y') where emp_id='" + emp_id + "' AND checkout_time='null' AND checkin_date=STR_TO_DATE('" + Date + "','%d-%b-%Y')";
                             cc.s.executeUpdate(q);
+                            JOptionPane.showMessageDialog(null, "Checkout Succesfull");
                             String d = "select chenkin_time,checkout_time,(34.25*(checkout_time-chenkin_time)) as remainng_time from attendance where emp_id='" + emp_id + "'";
                             ResultSet pq = cc.s.executeQuery(d);
                             while (pq.next()) {
@@ -1385,13 +1390,6 @@ public class Usertestinginterface {
         });
         notchildpanel.add(notrefb);
 
-        lmsg1 = new JLabel();
-        lmsg1.setVisible(false);
-        lmsg1.setBounds(30, 50, 1500, 70);
-        lmsg1.setFont(new Font("solaris-2", Font.BOLD, 30));
-        lmsg1.setForeground(Color.WHITE);
-        notchildpanel.add(lmsg1);
-
         lmsg2 = new JLabel();
         lmsg2.setVisible(false);
         lmsg2.setBounds(30, 200, 1500, 70);
@@ -1537,25 +1535,40 @@ public class Usertestinginterface {
         } catch (Exception e) {
 
         }
-        
-        try{
-            conn p = new conn();
-            String st="Select * from salary where emp_id='" + emp_id + "' and status='unseen'";
-            ResultSet es=p.s.executeQuery(st);
-            String q1 = "Select * from eleave where emp_id='" + emp_id + "' and  status1='unseen' and status!='Pending'";
-            ResultSet rss = p.s.executeQuery(q1);
-            if(!es.next()&& !rss.next()){
-                notrefb.setVisible(true);
-                lmsg.setVisible(true);
-            }else{
+
+        //Adding a referest notification button
+        try {
+            conn c9 = new conn();
+            String q = "Select * from salary where emp_id='" + emp_id + "' and status='unseen'";
+            ResultSet qs = c9.s.executeQuery(q);
+            if (qs.next()) {
+
                 notrefb.setVisible(false);
                 lmsg.setVisible(false);
+            } else {
+
+                try {
+                    conn c91 = new conn();
+                    String q9 = "Select * from eleave where emp_id='" + emp_id + "' and status1='unseen'";
+                    ResultSet qs1 = c91.s.executeQuery(q9);
+                    if (qs1.next()) {
+
+                        notrefb.setVisible(false);
+                        lmsg.setVisible(false);
+                    } else {
+
+                        notrefb.setVisible(true);
+                        lmsg.setVisible(true);
+                    }
+                } catch (Exception e) {
+
+                }
             }
-            
-        }catch(Exception e){
-            
+
+        } catch (Exception e) {
+
         }
-        
+
         try {
             conn c = new conn();
             String q = "Select * from salary where emp_id='" + emp_id + "' and status='unseen'";
@@ -1566,8 +1579,8 @@ public class Usertestinginterface {
                 while (rs1.next()) {
                     sal = rs1.getString("salary");
                     salarr = sal.split("\n");
-                    String sdate = rs1.getString("checkin_date");
-                    String edate = rs1.getString("checkout_date");
+                    String sdate = rs1.getString("s_date");
+                    String edate = rs1.getString("e_date");
                     sarr = sdate.split("\n");
                     earr = edate.split("\n");
                     seenb.setVisible(true);
@@ -1586,6 +1599,7 @@ public class Usertestinginterface {
 
                 }
             } else {
+
             }
 
         } catch (Exception e) {
